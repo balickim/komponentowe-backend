@@ -3,17 +3,23 @@
   "version": "1.0.0",
   "description": "",
   "main": "databasePool.js",
+  "scripts": {
+    "start": "node ./bin/server.js",
+    "dev": "nodemon ./bin/server.js",
+    "configure": "configure_db.sh",
+    "configure-dev": "npm run configure && npm run dev"
+  },
   "bin": {
     "komponentowe-backend": "insertTraits.js"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "async": "^2.6.2",
+    "express": "^4.17.1",
+    "msnodesqlv8": "^0.8.4",
+    "mssql": "^6.0.1",
     "tedious": "^5.0.3"
   }
 }

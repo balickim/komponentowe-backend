@@ -1,7 +1,15 @@
 module.exports = {
-    user: 'zjahplxb',
-    host: 'balarama.db.elephantsql.com',
-    database: 'zjahplxb',
-    password: 'GQAuawrx30owdgSHgCOqTxrNM3er44lm',
-    port: 5432
+    authentication: {
+        options: {
+            userName: 'marcin.kmiecik',
+            password: '<axSIFux9@>'
+        },
+        type: 'default'
+    },
+    server: 'yerbaland.database.windows.net',
+    options:
+    {
+        database: 'DnD',
+        encrypt: true
+    }
 };
