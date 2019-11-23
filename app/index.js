@@ -4,6 +4,7 @@ var bodyParser = require("body-parser");
 var sql = require("mssql");
 const session = require('express-session');
 const { ExpressOIDC } = require('@okta/oidc-middleware');
+const OktaJwtVerifier = require('@okta/jwt-verifier');
 
 var app = express();
 // session support is required to use ExpressOIDC
@@ -22,6 +23,19 @@ const oidc = new ExpressOIDC({
     appBaseUrl: 'http://localhost:3000',
     scope: 'openid profile'
 });
+
+// const oktaJwtVerifier = new OktaJwtVerifier({
+//     issuer: 'https://dev-384592.okta.com/oauth2/default'
+// });
+
+// oktaJwtVerifier.verifyAccessToken("accessTokenString", 'api://default')
+//     .then(jwt => {
+//         // the token is valid (per definition of 'valid' above)
+//         console.log(jwt.claims);
+//     })
+//     .catch(err => {
+//         // a validation failed, inspect the error
+//     });
 
 // ExpressOIDC will attach handlers for the /login and /authorization-code/callback routes
 app.use(oidc.router);
@@ -46,12 +60,6 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, contentType,Content-Type, Accept, Authorization");
     next();
 });
-
-//Setting up server
-// var server = app.listen(process.env.PORT || 8080, function () {
-//     var port = server.address().port;
-//     console.log("App now running on port", port);
-// });
 
 //Initiallising connection string
 var dbConfig = {
@@ -97,7 +105,6 @@ const getUsers = () => {
             (error, response) => {
                 if (error) return reject(error);
 
-                // console.log(response.recordsets[0][0]);
                 const getUsers = response.recordsets[0][0];
 
                 Promise.resolve(getUsers).then(users => resolve({ users }))
