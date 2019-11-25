@@ -16,9 +16,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@okta/jwt-verifier": "^1.0.0",
+    "@okta/oidc-middleware": "^2.1.0",
     "async": "^2.6.2",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "express-session": "^1.17.0",
     "msnodesqlv8": "^0.8.4",
     "mssql": "^6.0.1",
     "tedious": "^5.0.3"
