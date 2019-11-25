@@ -102,6 +102,12 @@ app.get('/users', (req, res, next) => {
         .catch(error => next(error));
 });
 
+app.post('/signup', (req, res, next) => {
+
+    pool.query(
+        'INSERT INTO Users("idUsers", "userEmail", "userName", "userPassword") VALUES("email@gmail.com", "test", "test")');
+});
+
 const getUsers = () => {
     return new Promise((resolve, reject) => {
         sql.query(
