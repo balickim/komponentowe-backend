@@ -21,7 +21,6 @@
     "express": "^4.17.1",
     "msnodesqlv8": "^0.8.4",
     "mssql": "^6.0.1",
-    "simple-oauth2": "^3.0.1",
     "tedious": "^5.0.3"
   }
 }
