@@ -4,10 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app",
-    "dev": "nodemon app",
-    "configure": "configure_db.sh",
-    "configure-dev": "npm run configure && npm run dev"
+    "start": "nodemon app"
   },
   "author": "",
   "license": "ISC",

@@ -8,7 +8,7 @@ var dbConfig = require('../secrets/databaseConfiguration');
 
 var app = express();
 
-const expressSwagger = require('express-swagger-generator');
+const expressSwagger = require('express-swagger-generator')(app);
 
 var PORT = 3000;
 // session support is required to use ExpressOIDC
@@ -117,8 +117,6 @@ const getUsers = () => {
         )
     });
 }
-
-
 
 let options = {
     swaggerDefinition: {
