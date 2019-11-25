@@ -105,7 +105,8 @@ app.get('/users', (req, res, next) => {
 app.post('/signup', (req, res, next) => {
 
     sql.query(
-        'INSERT INTO Users("idUsers", "userEmail", "userName", "userPassword") VALUES("email@gmail.com", "test", "test")');
+        `INSERT INTO Users ("userEmail", "userName", "userPassword")
+         VALUES("email@gmail.com", "test", "test")`);
 });
 
 const getUsers = () => {
