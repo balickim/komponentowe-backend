@@ -12,29 +12,33 @@ const router = new Router();
 
 
 router.post('/signup', (req, res, next) => {
-    const { username, password } = req.body;
-    const usernameHash = hash(username);
-    const passwordHash = hash(password);
 
-    AccountTable.getAccount({ usernameHash })
-        .then(({ account }) => {
-            if (!account) {
-                return AccountTable.storeAccount({ usernameHash, passwordHash })
-            } else {
-                const error = new Error('Ten login jest już zajęty!');
+    pool.query(
+        'INSERT INTO Users("idUsers", "userEmail", "userName", "userPassword") VALUES("email@gmail.com", "test", "test")');
 
-                error.statusCode = 409;
+    // const { username, password } = req.body;
+    // const usernameHash = hash(username);
+    // const passwordHash = hash(password);
 
-                throw error;
-            }
-        })
-        .then(() => {
-            return setSession({ username, res });
+    // AccountTable.getAccount({ usernameHash })
+    //     .then(({ account }) => {
+    //         if (!account) {
+    //             return AccountTable.storeAccount({ usernameHash, passwordHash })
+    //         } else {
+    //             const error = new Error('Ten login jest już zajęty!');
+
+    //             error.statusCode = 409;
+
+    //             throw error;
+    //         }
+    //     })
+    //     .then(() => {
+    //         return setSession({ username, res });
 
 
-        })
-        .then(({ message }) => { res.json({ message }) })
-        .catch(error => next(error));
+    //     })
+    //     .then(({ message }) => { res.json({ message }) })
+    //     .catch(error => next(error));
 });
 
 router.post('/login', (req, res, next) => {
