@@ -110,7 +110,7 @@ app.post('/signup', (req, res, next) => {
 
 const getUsers = () => {
     return new Promise((resolve, reject) => {
-        sql.query(
+        pool.query(
             'SELECT * FROM Users',
             (error, response) => {
                 if (error) return reject(error);
