@@ -106,9 +106,12 @@ app.post('/signup', (req, res, next) => {
 
     sql.query(
         `INSERT INTO Users (userEmail, userName, userPassword)
-         VALUES('email@gmail.com', 'test', 'test')`);
+         VALUES('email@gmail.com', 'test', 'test')`, (err, data) => {
+        res.status(200).json({
+            message: "Product added."
+        });
+    });
 });
-
 const getUsers = () => {
     return new Promise((resolve, reject) => {
         sql.query(
