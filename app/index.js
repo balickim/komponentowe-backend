@@ -104,13 +104,13 @@ app.get('/users', (req, res, next) => {
 
 app.post('/signup', (req, res, next) => {
 
-    pool.query(
+    sql.query(
         'INSERT INTO Users("idUsers", "userEmail", "userName", "userPassword") VALUES("email@gmail.com", "test", "test")');
 });
 
 const getUsers = () => {
     return new Promise((resolve, reject) => {
-        pool.query(
+        sql.query(
             'SELECT * FROM Users',
             (error, response) => {
                 if (error) return reject(error);
