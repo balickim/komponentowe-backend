@@ -2,19 +2,19 @@
   "name": "komponentowe-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "databasePool.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node ./bin/server.js",
+    "start": "nodemon app",
     "dev": "nodemon app",
     "configure": "configure_db.sh",
     "configure-dev": "npm run configure && npm run dev"
   },
-  "bin": {
-    "komponentowe-backend": "insertTraits.js"
-  },
-  "keywords": [],
   "author": "",
   "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  },
+  "keywords": [],
   "dependencies": {
     "@okta/jwt-verifier": "^1.0.0",
     "@okta/oidc-middleware": "^2.1.0",
