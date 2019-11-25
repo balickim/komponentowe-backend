@@ -1,15 +1,12 @@
-module.exports = {
-    authentication: {
-        options: {
-            userName: 'marcin.kmiecik',
-            password: '<axSIFux9@>'
-        },
-        type: 'default'
-    },
-    server: 'yerbaland.database.windows.net',
+var dbConfig = {
+    user: "marcin.kmiecik",
+    password: "axSIFux9@",
+    server: "yerbaland.database.windows.net",
+    database: "DnD",
     options:
     {
-        database: 'DnD',
         encrypt: true
     }
 };
+
+module.exports = dbConfig;

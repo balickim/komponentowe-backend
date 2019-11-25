@@ -1,12 +1,16 @@
-//Initiallising node modules
 var express = require("express");
 var bodyParser = require("body-parser");
 var sql = require("mssql");
 const session = require('express-session');
 const { ExpressOIDC } = require('@okta/oidc-middleware');
 const OktaJwtVerifier = require('@okta/jwt-verifier');
+var dbConfig = require('../secrets/databaseConfiguration');
 
 var app = express();
+
+const expressSwagger = require('express-swagger-generator');
+
+var PORT = 3000;
 // session support is required to use ExpressOIDC
 app.use(session({
     secret: 'this should be secure',
@@ -41,8 +45,8 @@ const oidc = new ExpressOIDC({
 app.use(oidc.router);
 
 oidc.on('ready', () => {
-    app.listen(process.env.PORT || 3000, () =>
-        console.log(`App now running on port 3000`));
+    app.listen(process.env.PORT || PORT, () =>
+        console.log(`App now running on port ${PORT}`));
 });
 
 oidc.on('error', err => {
@@ -62,37 +66,37 @@ app.use(function (req, res, next) {
 });
 
 //Initiallising connection string
-var dbConfig = {
-    user: "marcin.kmiecik",
-    password: "axSIFux9@",
-    server: "yerbaland.database.windows.net",
-    database: "DnD",
-    options:
-    {
-        encrypt: true
-    }
-};
-
+// var dbConfig = {
+//     user: "marcin.kmiecik",
+//     password: "axSIFux9@",
+//     server: "yerbaland.database.windows.net",
+//     database: "DnD",
+//     options:
+//     {
+//         encrypt: true
+//     }
+// };
+// console.log(dbConfig);
 sql.connect(dbConfig);
 
-app.get('/protected', oidc.ensureAuthenticated(), (req, res) => {
-    res.json(req.userContext.userinfo);
-});
+// app.get('/protected', oidc.ensureAuthenticated(), (req, res) => {
+//     res.json(req.userContext.userinfo);
+// });
 
-app.get('/', (req, res) => {
-    if (req.isAuthenticated()) {
-        res.send(`Zalogowano na ${req.userContext.userinfo.name}!`);
-    } else {
-        res.send('Niezalogowano');
-    }
-});
+// app.get('/', (req, res) => {
+//     if (req.isAuthenticated()) {
+//         res.send(`Zalogowano na ${req.userContext.userinfo.name}!`);
+//     } else {
+//         res.send('Niezalogowano');
+//     }
+// });
 
-app.get('/local-logout', (req, res) => {
-    req.logout();
-    res.redirect('/');
-});
+// app.get('/local-logout', (req, res) => {
+//     req.logout();
+//     res.redirect('/');
+// });
 
-app.get('/users', oidc.ensureAuthenticated(), (req, res, next) => {
+app.get('/users', (req, res, next) => {
     getUsers()
         .then(({ users }) => res.json({ users }))
         .catch(error => next(error));
@@ -116,22 +120,44 @@ const getUsers = () => {
 
 
 
+let options = {
+    swaggerDefinition: {
+        info: {
+            description: 'Opis serwera',
+            title: 'System Obsługi Przychodni',
+            version: '0.0.1',
+        },
+        host: 'localhost:3000',
+        basePath: '/v1',
+        produces: [
+            "application/json",
+            "application/xml"
+        ],
+        schemes: ['http', 'https'],
+        securityDefinitions: {
+            JWT: {
+                type: 'apiKey',
+                in: 'header',
+                name: 'Authorization',
+                description: "",
+            }
+        }
+    },
+    basedir: __dirname, //app absolute path
+    files: ['/api/*.js'] //Path to the API handle folder
+};
+expressSwagger(options)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// /**
+//  * serveSwagger must be called after defining your router.
+//  * @param app Express object
+//  * @param endPoint Swagger path on which swagger UI display
+//  * @param options Swagget Options.
+//  * @param path.routePath path to folder in which routes files defined.
+//  * @param path.requestModelPath Optional parameter which is path to folder in which requestModel defined, if not given request params will not display on swagger documentation.
+//  * @param path.responseModelPath Optional parameter which is path to folder in which responseModel defined, if not given response objects will not display on swagger documentation.
+//  */
+// expressSwagger.serveSwagger(app, "/swagger", options, { routePath: './src/routes/', requestModelPath: './src/requestModel', responseModelPath: './src/responseModel' });
 
 
 
@@ -158,3 +184,5 @@ const getUsers = () => {
 //     var query = "DELETE FROM [user] WHERE Id=" + req.params.id;
 //     executeQuery(res, query);
 // });
+
+module.exports = app;

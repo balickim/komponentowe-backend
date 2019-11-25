@@ -9,6 +9,8 @@ const { getDragonWithTraits } = require('../dragon/helper');
 
 const router = new Router();
 
+
+
 router.post('/signup', (req, res, next) => {
     const { username, password } = req.body;
     const usernameHash = hash(username);
@@ -17,9 +19,7 @@ router.post('/signup', (req, res, next) => {
     AccountTable.getAccount({ usernameHash })
         .then(({ account }) => {
             if (!account) {
-
                 return AccountTable.storeAccount({ usernameHash, passwordHash })
-
             } else {
                 const error = new Error('Ten login jest już zajęty!');
 
@@ -29,20 +29,9 @@ router.post('/signup', (req, res, next) => {
             }
         })
         .then(() => {
-
             return setSession({ username, res });
-        })
-        .then(() => {
-            Schema.addSchemaToCatalog({ organizationName: username, schemaName: username, schemaOwner: 'zjahplxb' })
-                .catch(error => next(error));
-        })
-        .then(() => {
-            Schema.createSchema({ schemaName: username, schemaOwner: 'zjahplxb' })
-                .catch(error => next(error))
-        })
-        .then(() => {
-            Schema.createSchemaTables({ schemaName: username })
-                .catch(error => next(error));
+
+
         })
         .then(({ message }) => { res.json({ message }) })
         .catch(error => next(error));
