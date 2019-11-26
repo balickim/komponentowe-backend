@@ -102,7 +102,7 @@ app.get('/users', (req, res, next) => {
         .catch(error => next(error));
 });
 
-app.post('/signup', (req, res, next) => {
+app.get('/signup', (req, res, next) => {
 
     sql.query(
         `INSERT INTO [Users]
