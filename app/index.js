@@ -105,12 +105,19 @@ app.get('/users', (req, res, next) => {
 app.post('/signup', (req, res, next) => {
 
     sql.query(
-        `INSERT INTO Users (userEmail, userName, userPassword)
-         VALUES('email@gmail.com', 'test', 'test')`, (err, data) => {
-        res.status(200).json({
-            message: "Product added."
-        });
-    });
+        `INSERT INTO Users
+       ( [userEmail]
+       , [userName]
+       , [userPassword]
+       )
+VALUES
+       ('test'
+       ,'test'
+       ,'test');`)
+    //  , (err, data) => {
+    // res.status(200).json({
+    //     message: "User added."
+    // });
 });
 const getUsers = () => {
     return new Promise((resolve, reject) => {
