@@ -21,6 +21,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.0",
     "express-swagger-generator": "^1.1.15",
-    "mssql": "^6.0.1"
+    "mssql": "^6.0.1",
+    "pg": "^7.14.0"
   }
 }

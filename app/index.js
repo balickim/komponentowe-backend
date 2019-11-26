@@ -5,6 +5,7 @@ const session = require('express-session');
 const { ExpressOIDC } = require('@okta/oidc-middleware');
 const OktaJwtVerifier = require('@okta/jwt-verifier');
 var dbConfig = require('../secrets/databaseConfiguration');
+const { Pool } = require('pg');
 
 var app = express();
 
@@ -77,7 +78,9 @@ app.use(function (req, res, next) {
 //     }
 // };
 // console.log(dbConfig);
-sql.connect(dbConfig);
+// sql.connect(dbConfig);
+
+const pool = new Pool(dbConfig);
 
 // app.get('/protected', oidc.ensureAuthenticated(), (req, res) => {
 //     res.json(req.userContext.userinfo);
@@ -98,38 +101,45 @@ sql.connect(dbConfig);
 
 app.get('/users', (req, res, next) => {
     getUsers()
-        .then(({ users }) => res.json({ users }))
+        .then((users) => res.json(users))
         .catch(error => next(error));
 });
 
-app.get('/signup', (req, res, next) => {
+app.post('/signup', (req, res, next) => {
 
-    sql.query(
-        `INSERT INTO [Users]
-       ( username
-       , password
-       )
-VALUES
-       ('test'
-       ,'test');`)
-    // , (error, response) => {
-    //     if (error) return reject(error);
-    // })
+    const usernameHash = "geregerge";
+    const passwordHash = "ergergergerge";
+
+    return AccountTable.storeAccount({ usernameHash, passwordHash })
+        .then(({ message }) => { res.json({ message }) })
+        .catch(error => next(error));
 });
 const getUsers = () => {
     return new Promise((resolve, reject) => {
-        sql.query(
-            'SELECT * FROM Users',
+        pool.query(
+            `SELECT * from users`,
             (error, response) => {
                 if (error) return reject(error);
 
-                const getUsers = response.recordsets[0][0];
-
-                Promise.resolve(getUsers).then(users => resolve({ users }))
-                    .catch(error => reject(error));
+                resolve(response.rows);
             }
         )
     });
+}
+class AccountTable {
+    static storeAccount({ usernameHash, passwordHash }) {
+        return new Promise((resolve, reject) => {
+            pool.query(
+                'INSERT INTO users (username,password) VALUES($1,$2)',
+                [usernameHash, passwordHash],
+                (error, response) => {
+                    if (error) return reject(error);
+
+                    resolve();
+                }
+            );
+        });
+    }
 }
 
 let options = {
