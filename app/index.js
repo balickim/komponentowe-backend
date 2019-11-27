@@ -108,16 +108,8 @@ app.get('/users', (req, res, next) => {
     const { apikey } = req.body;
 
     correctApiKey(apikey)
-        .then((apikey) => {
-            if (!apikey) {
-                return getUsers()
-            } else {
-                const error = new Error('Ten login jest już zajęty!');
-
-                error.statusCode = 409;
-
-                throw error;
-            }
+        .then(() => {
+            return getUsers()
         })
         .then((users) => { res.json({ users }) })
         .catch(error => next(error));
@@ -140,7 +132,7 @@ app.post('/signup', (req, res, next) => {
                 throw error;
             }
         })
-        .then(({ message }) => { res.json({ message }) })
+        .then(() => res.json({ message: 'sukces' }))
         .catch(error => next(error));
 });
 const getUsers = () => {
