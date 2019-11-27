@@ -65,18 +65,6 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, contentType,Content-Type, Accept, Authorization");
     next();
 });
-
-//Initiallising connection string
-// var dbConfig = {
-//     user: "marcin.kmiecik",
-//     password: "axSIFux9@",
-//     server: "yerbaland.database.windows.net",
-//     database: "DnD",
-//     options:
-//     {
-//         encrypt: true
-//     }
-// };
 // console.log(dbConfig);
 // sql.connect(dbConfig);
 
@@ -106,11 +94,22 @@ app.get('/users', (req, res, next) => {
 });
 
 app.post('/signup', (req, res, next) => {
+    const { username, password } = req.body;
 
-    const usernameHash = "geregerge";
-    const passwordHash = "ergergergerge";
+    AccountTable.getAccount({ username })
+        .then(({ account }) => {
+            if (!account) {
 
-    return AccountTable.storeAccount({ usernameHash, passwordHash })
+                return AccountTable.storeAccount({ username, password })
+
+            } else {
+                const error = new Error('Ten login jest już zajęty!');
+
+                error.statusCode = 409;
+
+                throw error;
+            }
+        })
         .then(({ message }) => { res.json({ message }) })
         .catch(error => next(error));
 });
@@ -127,17 +126,32 @@ const getUsers = () => {
     });
 }
 class AccountTable {
-    static storeAccount({ usernameHash, passwordHash }) {
+    static storeAccount({ username, password }) {
         return new Promise((resolve, reject) => {
             pool.query(
                 'INSERT INTO users (username,password) VALUES($1,$2)',
-                [usernameHash, passwordHash],
+                [username, password],
                 (error, response) => {
                     if (error) return reject(error);
 
                     resolve();
                 }
             );
+        });
+    }
+
+    static getAccount({ username }) {
+        return new Promise((resolve, reject) => {
+            pool.query(
+                `SELECT id, username, password FROM users 
+                WHERE username = $1`,
+                [username],
+                (error, response) => {
+                    if (error) return reject(error);
+
+                    resolve({ account: response.rows[0] });
+                }
+            )
         });
     }
 }
