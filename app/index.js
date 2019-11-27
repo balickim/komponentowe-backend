@@ -116,21 +116,25 @@ app.get('/users', (req, res, next) => {
 });
 
 app.post('/signup', (req, res, next) => {
-    const { username, password } = req.body;
+    const { apikey, username, password } = req.body;
 
-    AccountTable.getAccount({ username })
-        .then(({ account }) => {
-            if (!account) {
+    correctApiKey(apikey)
+        .then(() => {
 
-                return AccountTable.storeAccount({ username, password })
+            AccountTable.getAccount({ username })
+                .then(({ account }) => {
+                    if (!account) {
 
-            } else {
-                const error = new Error('Ten login jest już zajęty!');
+                        return AccountTable.storeAccount({ username, password })
 
-                error.statusCode = 409;
+                    } else {
+                        const error = new Error('Ten login jest już zajęty!');
 
-                throw error;
-            }
+                        error.statusCode = 409;
+
+                        throw error;
+                    }
+                })
         })
         .then(() => res.json({ message: 'sukces' }))
         .catch(error => next(error));
