@@ -66,7 +66,9 @@ const correctApiKey = (apiKey) => {
         if (API_KEY === apiKey) {
             return resolve();
         } else {
-            return reject('Nieprawidłowy API Key - Skontaktuj się administratorem systemu');
+            const error = new Error('Invalid APIKey');
+
+            return reject(error);
         }
     });
 };
