@@ -1,6 +1,7 @@
 const Session = require('../account/session');
 const AccountTable = require('../account/table');
 const { hash } = require('../account/helper');
+const { API_KEY } = require('../../secrets')
 
 const setSession = ({ username, res, sessionId }) => {
     return new Promise((resolve, reject) => {
@@ -60,4 +61,14 @@ const authenticatedAccount = ({ sessionString }) => {
     });
 };
 
-module.exports = { setSession, authenticatedAccount };
+const correctApiKey = (apiKey) => {
+    return new Promise((resolve, reject) => {
+        if (API_KEY === apiKey) {
+            return resolve();
+        } else {
+            return reject('Nieprawidłowy API Key - Skontaktuj się administratorem systemu');
+        }
+    });
+};
+
+module.exports = { setSession, authenticatedAccount, correctApiKey };

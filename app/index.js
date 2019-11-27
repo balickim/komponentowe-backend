@@ -1,33 +1,50 @@
 var express = require("express");
+const basicAuth = require('express-basic-auth')
 var bodyParser = require("body-parser");
 var sql = require("mssql");
 const session = require('express-session');
-const { ExpressOIDC } = require('@okta/oidc-middleware');
+// const { ExpressOIDC } = require('@okta/oidc-middleware');
 const OktaJwtVerifier = require('@okta/jwt-verifier');
 var dbConfig = require('../secrets/databaseConfiguration');
 const { Pool } = require('pg');
+const { correctApiKey } = require('../app/api/helper')
+
 
 var app = express();
 
 const expressSwagger = require('express-swagger-generator')(app);
 
-var PORT = 3000;
+// app.use(basicAuth({
+//     users: { 'admin': 'Qp8exqDqSvtVaD91md04' },
+//     unauthorizedResponse: getUnauthorizedResponse
+// }))
+
+// function getUnauthorizedResponse(req) {
+//     return req.auth
+//         ? ('Credentials ' + req.auth.user + ':' + req.auth.password + ' rejected')
+//         : 'No credentials provided'
+// }
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => console.log(`Serwer działa na porcie ${PORT}`));
+
 // session support is required to use ExpressOIDC
-app.use(session({
-    secret: 'this should be secure',
-    resave: true,
-    saveUninitialized: false
-}));
+// app.use(session({
+//     secret: 'this should be secure',
+//     resave: true,
+//     saveUninitialized: false
+// }));
 
 
-const oidc = new ExpressOIDC({
-    issuer: 'https://dev-384592.okta.com/oauth2/default',
-    client_id: '0oa1xc73iagCFV8Q4357',
-    client_secret: '9ATMTWguQcx-5Z0XyMJwsATPeCa1Qvs-waVHaNYk',
-    redirect_uri: 'http://localhost:3000/authorization-code/callback',
-    appBaseUrl: 'http://localhost:3000',
-    scope: 'openid profile'
-});
+// const oidc = new ExpressOIDC({
+//     issuer: 'https://dev-384592.okta.com/oauth2/default',
+//     client_id: '0oa1xc73iagCFV8Q4357',
+//     client_secret: '9ATMTWguQcx-5Z0XyMJwsATPeCa1Qvs-waVHaNYk',
+//     redirect_uri: 'http://localhost:3000/authorization-code/callback',
+//     appBaseUrl: 'http://localhost:3000',
+//     scope: 'openid profile'
+// });
 
 // const oktaJwtVerifier = new OktaJwtVerifier({
 //     issuer: 'https://dev-384592.okta.com/oauth2/default'
@@ -43,16 +60,16 @@ const oidc = new ExpressOIDC({
 //     });
 
 // ExpressOIDC will attach handlers for the /login and /authorization-code/callback routes
-app.use(oidc.router);
+// app.use(oidc.router);
 
-oidc.on('ready', () => {
-    app.listen(process.env.PORT || PORT, () =>
-        console.log(`App now running on port ${PORT}`));
-});
+// oidc.on('ready', () => {
+//     app.listen(process.env.PORT || PORT, () =>
+//         console.log(`App now running on port ${PORT}`));
+// });
 
-oidc.on('error', err => {
-    console.log('Unable to configure ExpressOIDC', err);
-});
+// oidc.on('error', err => {
+//     console.log('Unable to configure ExpressOIDC', err);
+// });
 
 // Body Parser Middleware
 app.use(bodyParser.json());
@@ -88,8 +105,16 @@ const pool = new Pool(dbConfig);
 // });
 
 app.get('/users', (req, res, next) => {
-    getUsers()
-        .then((users) => res.json(users))
+    const { apikey } = req.body;
+
+    correctApiKey(apikey)
+        .then(() => {
+            return getUsers()
+            // .then((users) => res.json({ users }))
+            // .catch(error => next(error));
+        }
+        )
+        .then((users) => res.json({ users }))
         .catch(error => next(error));
 });
 
