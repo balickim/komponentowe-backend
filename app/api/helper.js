@@ -66,7 +66,8 @@ const correctApiKey = (apiKey) => {
         if (API_KEY === apiKey) {
             return resolve();
         } else {
-            const error = new Error('Invalid APIKey');
+            // const error = new Error('Nieprawidłowy API Key');
+            const error = 'Nieprawidłowy API Key';
 
             return reject(error);
         }

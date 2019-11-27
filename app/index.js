@@ -108,13 +108,18 @@ app.get('/users', (req, res, next) => {
     const { apikey } = req.body;
 
     correctApiKey(apikey)
-        .then(() => {
-            return getUsers()
-            // .then((users) => res.json({ users }))
-            // .catch(error => next(error));
-        }
-        )
-        .then((users) => res.json({ users }))
+        .then((apikey) => {
+            if (!apikey) {
+                return getUsers()
+            } else {
+                const error = new Error('Ten login jest już zajęty!');
+
+                error.statusCode = 409;
+
+                throw error;
+            }
+        })
+        .then((users) => { res.json({ users }) })
         .catch(error => next(error));
 });
 
