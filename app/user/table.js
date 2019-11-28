@@ -1,11 +1,11 @@
 const pool = require('../../databasePool');
 
-class AccountTable {
-    static storeAccount({ usernameHash, passwordHash }) {
+class UserTable {
+    static storeAccount({ username, password }) {
         return new Promise((resolve, reject) => {
             pool.query(
-                'INSERT INTO account("usernameHash", "passwordHash") VALUES($1,$2)',
-                [usernameHash, passwordHash],
+                'INSERT INTO users (username,password) VALUES($1,$2)',
+                [username, password],
                 (error, response) => {
                     if (error) return reject(error);
 
@@ -15,12 +15,12 @@ class AccountTable {
         });
     }
 
-    static getAccount({ usernameHash }) {
+    static getAccount({ username }) {
         return new Promise((resolve, reject) => {
             pool.query(
-                `SELECT id, "passwordHash", "sessionId" FROM account 
-                WHERE "usernameHash" = $1`,
-                [usernameHash],
+                `SELECT id, username, password FROM users 
+                WHERE username = $1`,
+                [username],
                 (error, response) => {
                     if (error) return reject(error);
 
@@ -43,10 +43,23 @@ class AccountTable {
             );
         });
     }
+
+    static getUsers() {
+        return new Promise((resolve, reject) => {
+            pool.query(
+                `SELECT * from users`,
+                (error, response) => {
+                    if (error) return reject(error);
+
+                    resolve(response.rows);
+                }
+            )
+        });
+    }
 }
 
 // AccountTable.updateBalance({ accountId: 1, value: 1000000 })
 //     .then(() => console.log('update occured'))
 //     .catch(error => console.error('error', error));
 
-module.exports = AccountTable;
+module.exports = UserTable;
