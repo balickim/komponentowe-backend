@@ -7,6 +7,7 @@ const accountRouter = require('./api/account');
 const swaggerRouter = require('./swagger');
 
 var app = express();
+const pool = new Pool(dbConfig);
 
 app.use('/account', accountRouter);
 app.use('/swagger', swaggerRouter);
@@ -24,14 +25,6 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, contentType,Content-Type, Accept, Authorization");
     next();
-});
-
-const pool = new Pool(dbConfig);
-
-app.get('/usersss', (req, res, next) => {
-    getUsers()
-        .then((users) => res.json(users))
-        .catch(error => next(error));
 });
 
 app.get('/users', (req, res, next) => {
