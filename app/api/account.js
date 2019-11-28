@@ -1,15 +1,8 @@
 const { Router } = require('express');
 const AccountTable = require('../account/table.js');
-const Schema = require('../account/schema.js');
-const AccountDragonTable = require('../accountDragon/table.js');
 const Session = require('../account/session');
-const { hash } = require('../account/helper');
-const { setSession, authenticatedAccount } = require('./helper');
-const { getDragonWithTraits } = require('../dragon/helper');
 
 const router = new Router();
-
-
 
 router.post('/signup', (req, res, next) => {
 
@@ -110,5 +103,6 @@ router.get('/info', (req, res, next) => {
         })
         .catch(error => next(error))
 });
+
 
 module.exports = router;

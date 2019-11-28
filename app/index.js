@@ -1,77 +1,20 @@
 var express = require("express");
-const basicAuth = require('express-basic-auth')
 var bodyParser = require("body-parser");
-var sql = require("mssql");
-const session = require('express-session');
-// const { ExpressOIDC } = require('@okta/oidc-middleware');
-const OktaJwtVerifier = require('@okta/jwt-verifier');
 var dbConfig = require('../secrets/databaseConfiguration');
 const { Pool } = require('pg');
 const { correctApiKey } = require('../app/api/helper')
-
+const accountRouter = require('./api/account');
 
 var app = express();
 
+app.use('/account', accountRouter);
+
 const expressSwagger = require('express-swagger-generator')(app);
-
-// app.use(basicAuth({
-//     users: { 'admin': 'Qp8exqDqSvtVaD91md04' },
-//     unauthorizedResponse: getUnauthorizedResponse
-// }))
-
-// function getUnauthorizedResponse(req) {
-//     return req.auth
-//         ? ('Credentials ' + req.auth.user + ':' + req.auth.password + ' rejected')
-//         : 'No credentials provided'
-// }
 
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => console.log(`Serwer działa na porcie ${PORT}`));
 
-// session support is required to use ExpressOIDC
-// app.use(session({
-//     secret: 'this should be secure',
-//     resave: true,
-//     saveUninitialized: false
-// }));
-
-
-// const oidc = new ExpressOIDC({
-//     issuer: 'https://dev-384592.okta.com/oauth2/default',
-//     client_id: '0oa1xc73iagCFV8Q4357',
-//     client_secret: '9ATMTWguQcx-5Z0XyMJwsATPeCa1Qvs-waVHaNYk',
-//     redirect_uri: 'http://localhost:3000/authorization-code/callback',
-//     appBaseUrl: 'http://localhost:3000',
-//     scope: 'openid profile'
-// });
-
-// const oktaJwtVerifier = new OktaJwtVerifier({
-//     issuer: 'https://dev-384592.okta.com/oauth2/default'
-// });
-
-// oktaJwtVerifier.verifyAccessToken("accessTokenString", 'api://default')
-//     .then(jwt => {
-//         // the token is valid (per definition of 'valid' above)
-//         console.log(jwt.claims);
-//     })
-//     .catch(err => {
-//         // a validation failed, inspect the error
-//     });
-
-// ExpressOIDC will attach handlers for the /login and /authorization-code/callback routes
-// app.use(oidc.router);
-
-// oidc.on('ready', () => {
-//     app.listen(process.env.PORT || PORT, () =>
-//         console.log(`App now running on port ${PORT}`));
-// });
-
-// oidc.on('error', err => {
-//     console.log('Unable to configure ExpressOIDC', err);
-// });
-
-// Body Parser Middleware
 app.use(bodyParser.json());
 
 //CORS Middleware
@@ -82,30 +25,19 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, contentType,Content-Type, Accept, Authorization");
     next();
 });
-// console.log(dbConfig);
-// sql.connect(dbConfig);
 
 const pool = new Pool(dbConfig);
 
-// app.get('/protected', oidc.ensureAuthenticated(), (req, res) => {
-//     res.json(req.userContext.userinfo);
-// });
-
-// app.get('/', (req, res) => {
-//     if (req.isAuthenticated()) {
-//         res.send(`Zalogowano na ${req.userContext.userinfo.name}!`);
-//     } else {
-//         res.send('Niezalogowano');
-//     }
-// });
-
-// app.get('/local-logout', (req, res) => {
-//     req.logout();
-//     res.redirect('/');
-// });
+app.get('/usersss', (req, res, next) => {
+    getUsers()
+        .then((users) => res.json(users))
+        .catch(error => next(error));
+});
 
 app.get('/users', (req, res, next) => {
-    const { apikey } = req.body;
+    const { apikey } = req.headers;
+
+    // console.log(apikey);
 
     correctApiKey(apikey)
         .then(() => {
@@ -115,14 +47,9 @@ app.get('/users', (req, res, next) => {
         .catch(error => next(error));
 });
 
-app.get('/usersss', (req, res, next) => {
-    getUsers()
-        .then((users) => res.json(users))
-        .catch(error => next(error));
-});
-
 app.post('/signup', (req, res, next) => {
-    const { apikey, username, password } = req.body;
+    const { apikey } = req.headers;
+    const { username, password } = req.body;
 
     correctApiKey(apikey)
         .then(() => {
@@ -225,7 +152,7 @@ expressSwagger(options)
 //  * @param path.requestModelPath Optional parameter which is path to folder in which requestModel defined, if not given request params will not display on swagger documentation.
 //  * @param path.responseModelPath Optional parameter which is path to folder in which responseModel defined, if not given response objects will not display on swagger documentation.
 //  */
-// expressSwagger.serveSwagger(app, "/swagger", options, { routePath: './src/routes/', requestModelPath: './src/requestModel', responseModelPath: './src/responseModel' });
+// expressSwagger.serveSwagger(router, "/swagger", options, { routePath: './src/routes/', requestModelPath: './src/requestModel', responseModelPath: './src/responseModel' });
 
 
 
