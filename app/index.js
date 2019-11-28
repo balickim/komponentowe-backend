@@ -4,12 +4,12 @@ var dbConfig = require('../secrets/databaseConfiguration');
 const { Pool } = require('pg');
 const { correctApiKey } = require('../app/api/helper')
 const accountRouter = require('./api/account');
+const swaggerRouter = require('./swagger');
 
 var app = express();
 
 app.use('/account', accountRouter);
-
-const expressSwagger = require('express-swagger-generator')(app);
+app.use('/swagger', swaggerRouter);
 
 const PORT = process.env.PORT || 3000;
 
@@ -114,45 +114,6 @@ class AccountTable {
         });
     }
 }
-
-let options = {
-    swaggerDefinition: {
-        info: {
-            description: 'Opis serwera',
-            title: 'System Obsługi Przychodni',
-            version: '0.0.1',
-        },
-        host: 'localhost:3000',
-        basePath: '/v1',
-        produces: [
-            "application/json",
-            "application/xml"
-        ],
-        schemes: ['http', 'https'],
-        securityDefinitions: {
-            JWT: {
-                type: 'apiKey',
-                in: 'header',
-                name: 'Authorization',
-                description: "",
-            }
-        }
-    },
-    basedir: __dirname, //app absolute path
-    files: ['/api/*.js'] //Path to the API handle folder
-};
-expressSwagger(options)
-
-// /**
-//  * serveSwagger must be called after defining your router.
-//  * @param app Express object
-//  * @param endPoint Swagger path on which swagger UI display
-//  * @param options Swagget Options.
-//  * @param path.routePath path to folder in which routes files defined.
-//  * @param path.requestModelPath Optional parameter which is path to folder in which requestModel defined, if not given request params will not display on swagger documentation.
-//  * @param path.responseModelPath Optional parameter which is path to folder in which responseModel defined, if not given response objects will not display on swagger documentation.
-//  */
-// expressSwagger.serveSwagger(router, "/swagger", options, { routePath: './src/routes/', requestModelPath: './src/requestModel', responseModelPath: './src/responseModel' });
 
 
 
