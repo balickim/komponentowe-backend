@@ -115,6 +115,12 @@ app.get('/users', (req, res, next) => {
         .catch(error => next(error));
 });
 
+app.get('/usersss', (req, res, next) => {
+    getUsers()
+        .then((users) => res.json(users))
+        .catch(error => next(error));
+});
+
 app.post('/signup', (req, res, next) => {
     const { apikey, username, password } = req.body;
 
