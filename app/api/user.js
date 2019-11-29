@@ -1,8 +1,15 @@
 const { Router } = require('express');
 const UserTable = require('../user/table.js');
 const { correctApiKey } = require('./helper')
+// const passport = require('passport');
 
 const router = new Router();
+
+// router.post('/authenticate',
+//     passport.authenticate('headerapikey', { session: false, failureRedirect: '/api/unauthorized' }),
+//     function (req, res) {
+//         res.json({ message: "Authenticated" })
+//     });
 
 router.get('/', (req, res, next) => {
     const { apikey } = req.headers;
@@ -41,23 +48,29 @@ router.post('/signup', (req, res, next) => {
 });
 
 router.post('/login', (req, res, next) => {
+    const { apikey } = req.headers;
     const { username, password } = req.body;
 
-    UserTable.getAccount({ usernameHash: hash(username) })
-        .then(({ account }) => {
-            if (account && account.passwordHash === hash(password)) {
-                const { sessionId } = account;
+    correctApiKey(apikey)
+        .then(() => {
+            UserTable.getAccount({ username })
+                .then(({ account }) => {
+                    if (account && account.password === password) {
+                        // const { sessionId } = account;
 
-                return setSession({ username, res, sessionId })
-            } else {
-                const error = new Error('Incorrect username or password');
+                        // return console.log("zalogowano");
+                    } else {
+                        const error = new Error('Incorrect username or password');
 
-                error.statusCode = 409;
+                        error.statusCode = 409;
 
-                throw error;
-            }
+                        throw error;
+                    }
+                })
+                .then(() => res.json({ message: 'zalogowano na użytkownika ' + req.body.username }))
+                .catch(error => next(error));
         })
-        .then(({ message }) => res.json({ message }))
+        // .then(() => res.json({ message: 'dodano użytkownika ' + req.body.username }))
         .catch(error => next(error));
 });
 

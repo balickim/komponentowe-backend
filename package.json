@@ -23,7 +23,10 @@
     "express-basic-auth": "^1.2.0",
     "express-session": "^1.17.0",
     "express-swagger-generator": "^1.1.15",
+    "express-validator": "^6.3.0",
     "mssql": "^6.0.1",
+    "passport": "^0.4.0",
+    "passport-headerapikey": "^1.2.0",
     "pg": "^7.14.0",
     "swagger-ui-express": "^4.1.2"
   }
