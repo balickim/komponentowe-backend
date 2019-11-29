@@ -40,10 +40,7 @@
                         "in": "body",
                         "name": "body",
                         "description": "Created user object",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/User"
-                        }
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -94,6 +91,19 @@
             "type": "apiKey",
             "name": "api_key",
             "in": "header"
+        }
+    },
+    "definitions": {
+        "User": {
+            "type": "object",
+            "properties": {
+                "username": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
         }
     }
 }
