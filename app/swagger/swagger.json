@@ -28,7 +28,7 @@
                 ],
                 "summary": "Lista userów systemu",
                 "description": "Wymaga podania klucza API",
-                "operationId": "createUser",
+                "operationId": "user",
                 "consumes": [
                     "application/json"
                 ],
@@ -80,7 +80,42 @@
                 ],
                 "responses": {
                     "default": {
-                        "description": "successful operation"
+                        "description": "dodano"
+                    }
+                }
+            }
+        },
+        "/user/login": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Loguje usera",
+                "description": "",
+                "operationId": "loginUsersWithArrayInput",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "List of user object",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "message": {
+                        "description": "zalogowano"
                     }
                 }
             }

@@ -43,7 +43,7 @@ router.post('/signup', (req, res, next) => {
                     }
                 })
         })
-        .then(() => res.json({ message: 'dodano użytkownika ' + req.body.username }))
+        .then(() => res.json({ message: 'dodano' }))
         .catch(error => next(error));
 });
 
@@ -67,7 +67,7 @@ router.post('/login', (req, res, next) => {
                         throw error;
                     }
                 })
-                .then(() => res.json({ message: 'zalogowano na użytkownika ' + req.body.username }))
+                .then(() => res.json({ message: 'zalogowano' }))
                 .catch(error => next(error));
         })
         // .then(() => res.json({ message: 'dodano użytkownika ' + req.body.username }))

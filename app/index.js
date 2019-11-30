@@ -10,7 +10,7 @@ app.use('/user', userRouter);
 app.use('/swagger', swaggerRouter);
 
 app.get('/', (req, res, next) => {
-    res.redirect('https://komponentowe-backend.herokuapp.com/swagger/api-docs/');
+    res.redirect('./swagger/api-docs/');
 });
 
 const PORT = process.env.PORT || 3000;
