@@ -1,13 +1,17 @@
 var express = require("express");
 var bodyParser = require("body-parser");
-const userRouter = require('./api/user');
 const swaggerRouter = require('./swagger');
+const userRouter = require('./api/user');
+const patientRouter = require('./api/patient');
+const doctorRouter = require('./api/doctor');
 
 var app = express();
 app.use(bodyParser.json());
 
-app.use('/user', userRouter);
 app.use('/swagger', swaggerRouter);
+app.use('/user', userRouter);
+app.use('/pacjent', patientRouter);
+app.use('/lekarz', doctorRouter);
 
 app.get('/', (req, res, next) => {
     res.redirect('./swagger/api-docs/');
