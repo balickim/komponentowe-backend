@@ -97,7 +97,7 @@ router.post('/login', (req, res, next) => {
                     } else {
                         const error = new Error('Incorrect username or password');
 
-                        error.statusCode = 409;
+                        error.statusCode = 403;
 
                         throw error;
                     }
