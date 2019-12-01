@@ -6,7 +6,7 @@ const correctApiKey = (apiKey) => {
             return resolve();
         } else {
             // const error = new Error('Nieprawidłowy API Key');
-            const error = 'Nieprawidłowy API Key';
+            const error = 'Nieprawidłowy apikey';
 
             return reject(error);
         }
