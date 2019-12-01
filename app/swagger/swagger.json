@@ -14,6 +14,14 @@
         {
             "name": "user",
             "description": "Operacje testowe na user"
+        },
+        {
+            "name": "pacjent",
+            "description": "Operacje na pacjentach"
+        },
+        {
+            "name": "lekarz",
+            "description": "Operacje na lekarzach"
         }
     ],
     "schemes": [
@@ -73,7 +81,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/User"
+                                "$ref": "#/definitions/user"
                             }
                         }
                     }
@@ -108,7 +116,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/User"
+                                "$ref": "#/definitions/user"
                             }
                         }
                     }
@@ -116,6 +124,251 @@
                 "responses": {
                     "message": {
                         "description": "zalogowano"
+                    }
+                }
+            }
+        },
+        "/pacjent/{login}": {
+            "get": {
+                "tags": [
+                    "pacjent"
+                ],
+                "summary": "Pacjent znaleziony po loginie",
+                "description": "Wymaga podania klucza API",
+                "operationId": "pacjent",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created user object",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/pacjent"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/pacjent/signup": {
+            "post": {
+                "tags": [
+                    "pacjent"
+                ],
+                "summary": "Rejestracja pacjenta w systemie",
+                "description": "Wymaga podania klucza API",
+                "operationId": "pacjentSignup",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created user object",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/pacjentSignup"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/pacjent/login": {
+            "post": {
+                "tags": [
+                    "pacjent"
+                ],
+                "summary": "Logowanie pacjenta w systemie",
+                "description": "Wymaga podania klucza API",
+                "operationId": "pacjentLogin",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created user object",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/pacjentLogin"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/lekarz/{login}": {
+            "get": {
+                "tags": [
+                    "lekarz"
+                ],
+                "summary": "Lekarz znaleziony po loginie",
+                "description": "Wymaga podania klucza API",
+                "operationId": "lekarz",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created user object",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/lekarz"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/lekarz/signup": {
+            "post": {
+                "tags": [
+                    "lekarz"
+                ],
+                "summary": "Rejestracja lekarza w systemie",
+                "description": "Wymaga podania klucza API",
+                "operationId": "lekarzSignup",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created user object",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/lekarzSignup"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/lekarz/uzupelnijdane": {
+            "post": {
+                "tags": [
+                    "lekarz"
+                ],
+                "summary": "Uzupełnieje danych profilowych lekarza",
+                "description": "Wymaga podania klucza API",
+                "operationId": "lekarzUzupelnijDane",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created user object",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/lekarzUzupelnijDane"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/lekarz/login": {
+            "post": {
+                "tags": [
+                    "lekarz"
+                ],
+                "summary": "Logowanie lekarza w systemie",
+                "description": "Wymaga podania klucza API",
+                "operationId": "lekarzLogin",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created user object",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/lekarzLogin"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
                     }
                 }
             }
@@ -129,13 +382,138 @@
         }
     },
     "definitions": {
-        "User": {
+        "user": {
             "type": "object",
             "properties": {
                 "username": {
                     "type": "string"
                 },
                 "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "pacjent": {
+            "type": "object",
+            "properties": {
+                "login": {
+                    "type": "string"
+                }
+            }
+        },
+        "pacjentSignup": {
+            "type": "object",
+            "properties": {
+                "login": {
+                    "type": "string"
+                },
+                "haslo": {
+                    "type": "string"
+                },
+                "imie": {
+                    "type": "string"
+                },
+                "nazwisko": {
+                    "type": "string"
+                },
+                "idplci": {
+                    "type": "string"
+                },
+                "ulica": {
+                    "type": "string"
+                },
+                "numerlokalu": {
+                    "type": "string"
+                },
+                "miejscowosc": {
+                    "type": "string"
+                },
+                "kodpocztowy": {
+                    "type": "string"
+                },
+                "numertelefonu": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
+        "pacjentLogin": {
+            "type": "object",
+            "properties": {
+                "login": {
+                    "type": "string"
+                },
+                "haslo": {
+                    "type": "string"
+                }
+            }
+        },
+        "lekarz": {
+            "type": "object",
+            "properties": {
+                "login": {
+                    "type": "string"
+                }
+            }
+        },
+        "lekarzSignup": {
+            "type": "object",
+            "properties": {
+                "login": {
+                    "type": "string"
+                },
+                "haslo": {
+                    "type": "string"
+                }
+            }
+        },
+        "lekarzUzupelnijDane": {
+            "type": "object",
+            "properties": {
+                "login": {
+                    "type": "string"
+                },
+                "haslo": {
+                    "type": "string"
+                },
+                "imie": {
+                    "type": "string"
+                },
+                "nazwisko": {
+                    "type": "string"
+                },
+                "idplci": {
+                    "type": "string"
+                },
+                "ulica": {
+                    "type": "string"
+                },
+                "numerlokalu": {
+                    "type": "string"
+                },
+                "miejscowosc": {
+                    "type": "string"
+                },
+                "kodpocztowy": {
+                    "type": "string"
+                },
+                "numertelefonu": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
+        "lekarzLogin": {
+            "type": "object",
+            "properties": {
+                "login": {
+                    "type": "string"
+                },
+                "haslo": {
                     "type": "string"
                 }
             }
