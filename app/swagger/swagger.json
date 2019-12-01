@@ -2,7 +2,7 @@
     "swagger": "2.0",
     "info": {
         "description": "System do obsługi sieci przychodni",
-        "version": "0.0.3",
+        "version": "0.1.0",
         "title": "System Obsługi Przychodni",
         "termsOfService": "http://swagger.io/terms/",
         "contact": {
