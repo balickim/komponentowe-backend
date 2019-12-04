@@ -22,6 +22,10 @@ router.get('/', (req, res, next) => {
         .catch(error => next(error));
 });
 
+router.get('noapikey', (req, res, next) => {
+    return UserTable.getUsers()
+});
+
 router.post('/signup', (req, res, next) => {
     const { apikey } = req.headers;
     const { username, password } = req.body;
