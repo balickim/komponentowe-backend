@@ -58,6 +58,35 @@
                 }
             }
         },
+        "/user/noapikey": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Testowe api niewymagające apikey",
+                "description": "",
+                "operationId": "usernoapikey",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created user object",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
         "/user/signup": {
             "post": {
                 "tags": [
