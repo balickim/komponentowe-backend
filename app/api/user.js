@@ -22,8 +22,10 @@ router.get('/', (req, res, next) => {
         .catch(error => next(error));
 });
 
-router.get('noapikey', (req, res, next) => {
+router.get('/noapikey', (req, res, next) => {
     return UserTable.getUsers()
+        .then((users) => { res.json({ users }) })
+        .catch(error => next(error));
 });
 
 router.post('/signup', (req, res, next) => {
