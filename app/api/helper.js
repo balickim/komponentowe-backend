@@ -3,7 +3,7 @@ const { API_KEY } = require('../../secrets')
 const correctApiKey = (apiKey) => {
     return new Promise((resolve, reject) => {
         if (API_KEY === apiKey || 'undefined' === apiKey || undefined === apiKey) {
-            console.log("if: " + apiKey);
+            console.log("correctApiKey: " + apiKey);
             return resolve();
         } else {
             // const error = new Error('Nieprawidłowy API Key');
