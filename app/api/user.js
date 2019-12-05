@@ -5,22 +5,6 @@ const { correctApiKey } = require('./helper')
 
 const router = new Router();
 
-// router.post('/authenticate',
-//     passport.authenticate('headerapikey', { session: false, failureRedirect: '/api/unauthorized' }),
-//     function (req, res) {
-//         res.json({ message: "Authenticated" })
-//     });
-
-//CORS Middleware
-router.use(function (req, res, next) {
-    console.log("CORS Middleware");
-    //Enabling CORS 
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, contentType,Content-Type, Accept, Authorization");
-    next();
-});
-
 router.get('/', (req, res, next) => {
     const { apikey } = req.headers;
 

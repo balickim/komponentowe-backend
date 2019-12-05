@@ -8,6 +8,16 @@ const doctorRouter = require('./api/doctor');
 var app = express();
 app.use(bodyParser.json());
 
+//CORS Middleware
+app.use(function (req, res, next) {
+    //Enabling CORS 
+    console.log("using CORS Middleware...");
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, contentType,Content-Type, Accept, Authorization");
+    next();
+});
+
 app.use('/swagger', swaggerRouter);
 app.use('/user', userRouter);
 app.use('/pacjent', patientRouter);
@@ -20,14 +30,5 @@ app.get('/', (req, res, next) => {
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => console.log(`Serwer działa na porcie ${PORT}`));
-
-//CORS Middleware
-app.use(function (req, res, next) {
-    //Enabling CORS 
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, contentType,Content-Type, Accept, Authorization");
-    next();
-});
 
 module.exports = app;
