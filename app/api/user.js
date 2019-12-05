@@ -11,6 +11,16 @@ const router = new Router();
 //         res.json({ message: "Authenticated" })
 //     });
 
+//CORS Middleware
+router.use(function (req, res, next) {
+    console.log("CORS Middleware");
+    //Enabling CORS 
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, contentType,Content-Type, Accept, Authorization");
+    next();
+});
+
 router.get('/', (req, res, next) => {
     const { apikey } = req.headers;
 
