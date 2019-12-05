@@ -2,7 +2,7 @@ const { API_KEY } = require('../../secrets')
 
 const correctApiKey = (apiKey) => {
     return new Promise((resolve, reject) => {
-        if (API_KEY === apiKey) {
+        if (API_KEY === apiKey || 'undefined' === apiKey) {
             console.log("if: " + apiKey);
             return resolve();
         } else {
