@@ -22,6 +22,10 @@
         {
             "name": "lekarz",
             "description": "Operacje na lekarzach"
+        },
+        {
+            "name": "recepcja",
+            "description": "Operacje na pracownikach recepcji oraz operacje pracowników recepcji"
         }
     ],
     "schemes": [
@@ -337,7 +341,7 @@
                 "tags": [
                     "lekarz"
                 ],
-                "summary": "Uzupełnieje danych profilowych lekarza",
+                "summary": "Uzupełnienie danych profilowych lekarza",
                 "description": "Wymaga podania klucza API",
                 "operationId": "lekarzUzupelnijDane",
                 "consumes": [
@@ -375,6 +379,146 @@
                 "summary": "Logowanie lekarza w systemie",
                 "description": "Wymaga podania klucza API",
                 "operationId": "lekarzLogin",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created user object",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/lekarzLogin"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/recepcjonista/{login}": {
+            "get": {
+                "tags": [
+                    "recepcja"
+                ],
+                "summary": "Recepcjonista znaleziony po loginie",
+                "description": "Wymaga podania klucza API",
+                "operationId": "recepcjonista",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created user object",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/lekarz"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/recepcjonista/signup": {
+            "post": {
+                "tags": [
+                    "recepcja"
+                ],
+                "summary": "Rejestracja recepcjonisty w systemie",
+                "description": "Wymaga podania klucza API",
+                "operationId": "recepcjonistaSignup",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created user object",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/lekarzSignup"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/recepcjonista/uzupelnijdane": {
+            "post": {
+                "tags": [
+                    "recepcja"
+                ],
+                "summary": "Uzupełnienie danych profilowych recepcjonisty",
+                "description": "Wymaga podania klucza API",
+                "operationId": "recepcjonistaUzupelnijDane",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created user object",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/lekarzUzupelnijDane"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/recepcjonista/login": {
+            "post": {
+                "tags": [
+                    "recepcja"
+                ],
+                "summary": "Logowanie recepcjonisty w systemie",
+                "description": "Wymaga podania klucza API",
+                "operationId": "recepcjonistaLogin",
                 "consumes": [
                     "application/json"
                 ],
