@@ -44,7 +44,7 @@ router.post('/signup', (req, res, next) => {
         .catch(error => next(error));
 });
 
-router.post('/uzupelnijdane', (req, res, next) => {
+router.put('/uzupelnijdane', (req, res, next) => {
     const { apikey } = req.headers;
     const {
         login,
@@ -79,6 +79,18 @@ router.post('/uzupelnijdane', (req, res, next) => {
                 .catch(error => next(error));
         })
         .then(() => res.json({ message: 'dodano' }))
+        .catch(error => next(error));
+});
+
+router.get('/pobierzdane', (req, res, next) => {
+    const { apikey } = req.headers;
+    const { id } = req.body;
+
+    correctApiKey(apikey)
+        .then(() => {
+            return ReceptionistTable.getProfile({ id })
+        })
+        .then((receptionist) => { res.json(receptionist) })
         .catch(error => next(error));
 });
 

@@ -337,13 +337,48 @@
             }
         },
         "/lekarz/uzupelnijdane": {
-            "post": {
+            "put": {
                 "tags": [
                     "lekarz"
                 ],
                 "summary": "Uzupełnienie danych profilowych lekarza",
                 "description": "Wymaga podania klucza API",
                 "operationId": "lekarzUzupelnijDane",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created user object",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/lekarzUzupelnijDane"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/lekarz/pobierzdane": {
+            "get": {
+                "tags": [
+                    "lekarz"
+                ],
+                "summary": "Pobranie danych profilowych lekarza",
+                "description": "Wymaga podania klucza API",
+                "operationId": "lekarzPobierzDane",
                 "consumes": [
                     "application/json"
                 ],
@@ -477,13 +512,48 @@
             }
         },
         "/recepcjonista/uzupelnijdane": {
-            "post": {
+            "put": {
                 "tags": [
                     "recepcja"
                 ],
                 "summary": "Uzupełnienie danych profilowych recepcjonisty",
                 "description": "Wymaga podania klucza API",
                 "operationId": "recepcjonistaUzupelnijDane",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created user object",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/lekarzUzupelnijDane"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/recepcjonista/pobierzdane": {
+            "get": {
+                "tags": [
+                    "recepcja"
+                ],
+                "summary": "Pobieranie danych profilowych recepcjonisty",
+                "description": "Wymaga podania klucza API",
+                "operationId": "recepcjonistaPobierzDane",
                 "consumes": [
                     "application/json"
                 ],

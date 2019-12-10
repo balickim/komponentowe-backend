@@ -62,6 +62,22 @@ class ReceptionistTable {
             )
         });
     }
+
+    static getProfile({ id }) {
+        return new Promise((resolve, reject) => {
+            pool.query(
+                `SELECT imie, nazwisko, idplci, ulica, numerlokalu, miejscowosc, kodpocztowy, numertelefonu, email 
+                FROM danepracownika 
+                WHERE idpracownika = $1`,
+                [id],
+                (error, response) => {
+                    if (error) return reject(error);
+
+                    resolve(response.rows[0]);
+                }
+            )
+        });
+    }
 }
 
 module.exports = ReceptionistTable;
