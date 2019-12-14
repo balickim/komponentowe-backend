@@ -57,7 +57,7 @@ class ReceptionistTable {
                 (error, response) => {
                     if (error) return reject(error);
 
-                    resolve({ doctor: response.rows[0] });
+                    resolve({ receptionist: response.rows[0] });
                 }
             )
         });
