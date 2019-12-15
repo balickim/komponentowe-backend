@@ -334,6 +334,39 @@
                 }
             }
         },
+        "/lekarz/specialization/:id": {
+            "get": {
+                "tags": [
+                    "lekarz"
+                ],
+                "summary": "Doctor and specialization found by doctor id",
+                "description": "Requires apikey",
+                "operationId": "doctorSpecialization",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "Id of doctor to return",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
         "/lekarz/signup": {
             "post": {
                 "tags": [

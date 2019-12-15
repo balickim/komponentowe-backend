@@ -78,6 +78,25 @@ class DoctorTable {
             )
         });
     }
+
+    static getSpecialization({ idlekarza }) {
+        return new Promise((resolve, reject) => {
+            pool.query(
+                `SELECT imie, nazwisko, rodzajspecjalizacji 
+                FROM vspecjalizacjalekarza
+                WHERE idlekarza = $1`,
+                [idlekarza],
+                (error, response) => {
+                    if (error) return reject(error);
+
+                    resolve({ doctor: response.rows[0] });
+                }
+            )
+        });
+    }
 }
+// DoctorTable.getSpecialization({ idlekarza: 5 })
+//     .then((doctor) => { console.log(doctor) })
+//     .catch(error => console.error('error', error));
 
 module.exports = DoctorTable;
