@@ -19,9 +19,24 @@ class PatientTable {
     static getPatient({ login }) {
         return new Promise((resolve, reject) => {
             pool.query(
-                `SELECT idpacjenta, login, haslo, imie, nazwisko, idplci, ulica, numerlokalu, miejscowosc, kodpocztowy, numertelefonu, email FROM danepacjenta 
+                `SELECT idpacjenta, login, haslo, imie, nazwisko, idplci, ulica, numerlokalu, miejscowosc, kodpocztowy, numertelefonu, email, pesel FROM danepacjenta 
                 WHERE login = $1`,
                 [login],
+                (error, response) => {
+                    if (error) return reject(error);
+
+                    resolve({ patient: response.rows[0] });
+                }
+            )
+        });
+    }
+
+    static getPatientByPesel({ pesel }) {
+        return new Promise((resolve, reject) => {
+            pool.query(
+                `SELECT idpacjenta, imie, nazwisko, idplci, ulica, numerlokalu, miejscowosc, kodpocztowy, numertelefonu, email, pesel FROM danepacjenta 
+                WHERE pesel = $1`,
+                [pesel],
                 (error, response) => {
                     if (error) return reject(error);
 

@@ -16,6 +16,18 @@ router.get('/', (req, res, next) => {
         .catch(error => next(error));
 });
 
+router.get('/:pesel', (req, res, next) => {
+    const { apikey } = req.headers;
+    const { pesel } = req.params;
+
+    correctApiKey(apikey)
+        .then(() => {
+            return PatientTable.getPatientByPesel({ pesel })
+        })
+        .then((patient) => { res.json(patient) })
+        .catch(error => next(error));
+});
+
 router.post('/signup', (req, res, next) => {
     const { apikey } = req.headers;
     const {

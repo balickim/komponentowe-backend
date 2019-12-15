@@ -196,6 +196,39 @@
                 }
             }
         },
+        "/pacjent/:pesel": {
+            "get": {
+                "tags": [
+                    "pacjent"
+                ],
+                "summary": "Pacjent znaleziony po peselu",
+                "description": "Wymaga podania klucza API",
+                "operationId": "pacjentPesel",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "pesel",
+                        "description": "Pesel of patient to return",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
         "/pacjent/signup": {
             "post": {
                 "tags": [
