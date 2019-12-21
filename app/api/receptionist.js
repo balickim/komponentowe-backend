@@ -103,9 +103,10 @@ router.post('/login', (req, res, next) => {
             ReceptionistTable.getReceptionist({ login })
                 .then(({ receptionist }) => {
                     if (receptionist && receptionist.haslo === haslo) {
-                        // const { sessionId } = account;
 
-                        // return console.log("zalogowano");
+                        let id = receptionist.idrecepcjonistki;
+                        res.json({ message: 'zalogowano', idrecepcjonistki: id })
+
                     } else {
                         const error = new Error('Incorrect username or password');
 
@@ -114,7 +115,7 @@ router.post('/login', (req, res, next) => {
                         throw error;
                     }
                 })
-                .then(() => res.json({ message: 'zalogowano' }))
+                // .then(() => res.json({ message: 'zalogowano' }))
                 .catch(error => next(error));
         })
         // .then(() => res.json({ message: 'dodano użytkownika ' + req.body.username }))

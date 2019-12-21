@@ -103,7 +103,8 @@ router.post('/login', (req, res, next) => {
             DoctorTable.getDoctor({ login })
                 .then(({ doctor }) => {
                     if (doctor && doctor.haslo === haslo) {
-
+                        let id = doctor.idlekarza;
+                        res.json({ message: 'zalogowano', idlekarza: id })
 
                     } else {
                         const error = new Error('Incorrect username or password');
@@ -113,7 +114,7 @@ router.post('/login', (req, res, next) => {
                         throw error;
                     }
                 })
-                .then(() => res.json({ message: 'zalogowano' }))
+                // .then(() => res.json({ message: 'zalogowano' }))
                 .catch(error => next(error));
         })
         .catch(error => next(error));
