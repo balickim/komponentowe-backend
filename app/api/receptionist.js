@@ -44,7 +44,7 @@ router.post('/signup', (req, res, next) => {
         .catch(error => next(error));
 });
 
-router.put('/uzupelnijdane', (req, res, next) => {
+router.put('/datafillup', (req, res, next) => {
     const { apikey } = req.headers;
     const {
         login,
@@ -82,7 +82,7 @@ router.put('/uzupelnijdane', (req, res, next) => {
         .catch(error => next(error));
 });
 
-router.get('/pobierzdane', (req, res, next) => {
+router.get('/data', (req, res, next) => {
     const { apikey } = req.headers;
     const { id } = req.body;
 

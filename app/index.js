@@ -21,9 +21,9 @@ app.use(function (req, res, next) {
 
 app.use('/swagger', swaggerRouter);
 app.use('/user', userRouter);
-app.use('/pacjent', patientRouter);
-app.use('/lekarz', doctorRouter);
-app.use('/recepcjonista', receptionistRouter);
+app.use('/patient', patientRouter);
+app.use('/doctor', doctorRouter);
+app.use('/reception', receptionistRouter);
 
 app.get('/', (req, res, next) => {
     res.redirect('./swagger/api-docs/');

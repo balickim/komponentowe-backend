@@ -1,9 +1,9 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "System do obsługi sieci przychodni",
-        "version": "0.1.0",
-        "title": "System Obsługi Przychodni",
+        "description": "IT system to operate a clinic network",
+        "version": "0.5.7",
+        "title": "Clinic network system",
         "termsOfService": "http://swagger.io/terms/",
         "contact": {
             "email": "michal.balicki@onet.pl"
@@ -13,23 +13,22 @@
     "tags": [
         {
             "name": "user",
-            "description": "Operacje testowe na user"
+            "description": "Endpoints for testing connection"
         },
         {
-            "name": "pacjent",
-            "description": "Operacje na pacjentach"
+            "name": "patient",
+            "description": "Operations on patients"
         },
         {
-            "name": "lekarz",
-            "description": "Operacje na lekarzach"
+            "name": "doctor",
+            "description": "Operations on doctors"
         },
         {
-            "name": "recepcja",
-            "description": "Operacje na pracownikach recepcji oraz operacje pracowników recepcji"
+            "name": "reception",
+            "description": "Operations on or by reception workers"
         }
     ],
     "schemes": [
-        "https",
         "http"
     ],
     "paths": {
@@ -38,8 +37,8 @@
                 "tags": [
                     "user"
                 ],
-                "summary": "Lista userów systemu",
-                "description": "Wymaga podania klucza API",
+                "summary": "List of users",
+                "description": "Requires apikey",
                 "operationId": "user",
                 "consumes": [
                     "application/json"
@@ -67,7 +66,7 @@
                 "tags": [
                     "user"
                 ],
-                "summary": "Testowe api niewymagające apikey",
+                "summary": "List of users without apikey",
                 "description": "",
                 "operationId": "usernoapikey",
                 "consumes": [
@@ -96,8 +95,8 @@
                 "tags": [
                     "user"
                 ],
-                "summary": "Rejestruje usera",
-                "description": "",
+                "summary": "User register",
+                "description": "Requires apikey",
                 "operationId": "createUsersWithArrayInput",
                 "consumes": [
                     "application/json"
@@ -131,8 +130,8 @@
                 "tags": [
                     "user"
                 ],
-                "summary": "Loguje usera",
-                "description": "",
+                "summary": "User login",
+                "description": "Requires apikey",
                 "operationId": "loginUsersWithArrayInput",
                 "consumes": [
                     "application/json"
@@ -161,14 +160,14 @@
                 }
             }
         },
-        "/pacjent/{login}": {
+        "/patient/{login}": {
             "get": {
                 "tags": [
-                    "pacjent"
+                    "patient"
                 ],
-                "summary": "Pacjent znaleziony po loginie",
-                "description": "Wymaga podania klucza API",
-                "operationId": "pacjent",
+                "summary": "patient found by login",
+                "description": "Requires apikey",
+                "operationId": "patient",
                 "consumes": [
                     "application/json"
                 ],
@@ -184,7 +183,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/pacjent"
+                                "$ref": "#/definitions/loginString"
                             }
                         }
                     }
@@ -196,14 +195,14 @@
                 }
             }
         },
-        "/pacjent/:pesel": {
+        "/patient/:pesel": {
             "get": {
                 "tags": [
-                    "pacjent"
+                    "patient"
                 ],
-                "summary": "Pacjent znaleziony po peselu",
-                "description": "Wymaga podania klucza API",
-                "operationId": "pacjentPesel",
+                "summary": "patient found by PESEL",
+                "description": "Requires apikey",
+                "operationId": "patientPesel",
                 "consumes": [
                     "application/json"
                 ],
@@ -229,14 +228,14 @@
                 }
             }
         },
-        "/pacjent/signup": {
+        "/patient/signup": {
             "post": {
                 "tags": [
-                    "pacjent"
+                    "patient"
                 ],
-                "summary": "Rejestracja pacjenta w systemie",
-                "description": "Wymaga podania klucza API",
-                "operationId": "pacjentSignup",
+                "summary": "Patient register",
+                "description": "Requires apikey",
+                "operationId": "patientSignup",
                 "consumes": [
                     "application/json"
                 ],
@@ -252,7 +251,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/pacjentSignup"
+                                "$ref": "#/definitions/patientSignup"
                             }
                         }
                     }
@@ -264,14 +263,14 @@
                 }
             }
         },
-        "/pacjent/login": {
+        "/patient/login": {
             "post": {
                 "tags": [
-                    "pacjent"
+                    "patient"
                 ],
-                "summary": "Logowanie pacjenta w systemie",
-                "description": "Wymaga podania klucza API",
-                "operationId": "pacjentLogin",
+                "summary": "Patient login",
+                "description": "Requires apikey",
+                "operationId": "patientLogin",
                 "consumes": [
                     "application/json"
                 ],
@@ -287,7 +286,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/pacjentLogin"
+                                "$ref": "#/definitions/Login"
                             }
                         }
                     }
@@ -299,14 +298,14 @@
                 }
             }
         },
-        "/lekarz/{login}": {
+        "/doctor/{login}": {
             "get": {
                 "tags": [
-                    "lekarz"
+                    "doctor"
                 ],
-                "summary": "Lekarz znaleziony po loginie",
-                "description": "Wymaga podania klucza API",
-                "operationId": "lekarz",
+                "summary": "Doctor found by login",
+                "description": "Requires apikey",
+                "operationId": "doctor",
                 "consumes": [
                     "application/json"
                 ],
@@ -322,7 +321,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/lekarz"
+                                "$ref": "#/definitions/loginString"
                             }
                         }
                     }
@@ -334,10 +333,10 @@
                 }
             }
         },
-        "/lekarz/specialization/:id": {
+        "/doctor/specialization/:id": {
             "get": {
                 "tags": [
-                    "lekarz"
+                    "doctor"
                 ],
                 "summary": "Doctor and specialization found by doctor id",
                 "description": "Requires apikey",
@@ -367,14 +366,14 @@
                 }
             }
         },
-        "/lekarz/signup": {
+        "/doctor/signup": {
             "post": {
                 "tags": [
-                    "lekarz"
+                    "doctor"
                 ],
-                "summary": "Rejestracja lekarza w systemie",
-                "description": "Wymaga podania klucza API",
-                "operationId": "lekarzSignup",
+                "summary": "Doctor register",
+                "description": "Requires apikey",
+                "operationId": "doctorSignup",
                 "consumes": [
                     "application/json"
                 ],
@@ -390,7 +389,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/lekarzSignup"
+                                "$ref": "#/definitions/doctorSignup"
                             }
                         }
                     }
@@ -402,14 +401,14 @@
                 }
             }
         },
-        "/lekarz/uzupelnijdane": {
+        "/doctor/datafillup": {
             "put": {
                 "tags": [
-                    "lekarz"
+                    "doctor"
                 ],
-                "summary": "Uzupełnienie danych profilowych lekarza",
-                "description": "Wymaga podania klucza API",
-                "operationId": "lekarzUzupelnijDane",
+                "summary": "Doctor profile data fill up",
+                "description": "Requires apikey",
+                "operationId": "doctorDataFillUp",
                 "consumes": [
                     "application/json"
                 ],
@@ -425,7 +424,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/lekarzUzupelnijDane"
+                                "$ref": "#/definitions/profileData"
                             }
                         }
                     }
@@ -437,14 +436,14 @@
                 }
             }
         },
-        "/lekarz/pobierzdane": {
+        "/doctor/data": {
             "get": {
                 "tags": [
-                    "lekarz"
+                    "doctor"
                 ],
-                "summary": "Pobranie danych profilowych lekarza",
-                "description": "Wymaga podania klucza API",
-                "operationId": "lekarzPobierzDane",
+                "summary": "Doctor profile data",
+                "description": "Requires apikey",
+                "operationId": "doctorProfileData",
                 "consumes": [
                     "application/json"
                 ],
@@ -460,7 +459,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/lekarzUzupelnijDane"
+                                "$ref": "#/definitions/profileData"
                             }
                         }
                     }
@@ -472,14 +471,14 @@
                 }
             }
         },
-        "/lekarz/login": {
+        "/doctor/login": {
             "post": {
                 "tags": [
-                    "lekarz"
+                    "doctor"
                 ],
-                "summary": "Logowanie lekarza w systemie",
-                "description": "Wymaga podania klucza API",
-                "operationId": "lekarzLogin",
+                "summary": "Doctor Login",
+                "description": "Requires apikey",
+                "operationId": "Login",
                 "consumes": [
                     "application/json"
                 ],
@@ -495,7 +494,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/lekarzLogin"
+                                "$ref": "#/definitions/Login"
                             }
                         }
                     }
@@ -507,14 +506,14 @@
                 }
             }
         },
-        "/recepcjonista/{login}": {
+        "/reception/{login}": {
             "get": {
                 "tags": [
-                    "recepcja"
+                    "reception"
                 ],
-                "summary": "Recepcjonista znaleziony po loginie",
-                "description": "Wymaga podania klucza API",
-                "operationId": "recepcjonista",
+                "summary": "Reception worker found by login",
+                "description": "Requires apikey",
+                "operationId": "reception",
                 "consumes": [
                     "application/json"
                 ],
@@ -530,7 +529,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/lekarz"
+                                "$ref": "#/definitions/loginString"
                             }
                         }
                     }
@@ -542,14 +541,14 @@
                 }
             }
         },
-        "/recepcjonista/signup": {
+        "/reception/signup": {
             "post": {
                 "tags": [
-                    "recepcja"
+                    "reception"
                 ],
-                "summary": "Rejestracja recepcjonisty w systemie",
-                "description": "Wymaga podania klucza API",
-                "operationId": "recepcjonistaSignup",
+                "summary": "Reception worker register",
+                "description": "Requires apikey",
+                "operationId": "receptionSignup",
                 "consumes": [
                     "application/json"
                 ],
@@ -565,7 +564,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/lekarzSignup"
+                                "$ref": "#/definitions/doctorSignup"
                             }
                         }
                     }
@@ -577,14 +576,14 @@
                 }
             }
         },
-        "/recepcjonista/uzupelnijdane": {
+        "/reception/datafillup": {
             "put": {
                 "tags": [
-                    "recepcja"
+                    "reception"
                 ],
-                "summary": "Uzupełnienie danych profilowych recepcjonisty",
-                "description": "Wymaga podania klucza API",
-                "operationId": "recepcjonistaUzupelnijDane",
+                "summary": "Reception worker profile data fill up",
+                "description": "Requires apikey",
+                "operationId": "reception",
                 "consumes": [
                     "application/json"
                 ],
@@ -600,7 +599,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/lekarzUzupelnijDane"
+                                "$ref": "#/definitions/doctorDataFillUp"
                             }
                         }
                     }
@@ -612,14 +611,14 @@
                 }
             }
         },
-        "/recepcjonista/pobierzdane": {
+        "/reception/data": {
             "get": {
                 "tags": [
-                    "recepcja"
+                    "reception"
                 ],
-                "summary": "Pobieranie danych profilowych recepcjonisty",
-                "description": "Wymaga podania klucza API",
-                "operationId": "recepcjonistaPobierzDane",
+                "summary": "Reception worker profile data",
+                "description": "Requires apikey",
+                "operationId": "receptionData",
                 "consumes": [
                     "application/json"
                 ],
@@ -635,7 +634,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/lekarzUzupelnijDane"
+                                "$ref": "#/definitions/profileData"
                             }
                         }
                     }
@@ -647,14 +646,14 @@
                 }
             }
         },
-        "/recepcjonista/login": {
+        "/reception/login": {
             "post": {
                 "tags": [
-                    "recepcja"
+                    "reception"
                 ],
-                "summary": "Logowanie recepcjonisty w systemie",
-                "description": "Wymaga podania klucza API",
-                "operationId": "recepcjonistaLogin",
+                "summary": "Reception worker login",
+                "description": "Requires apikey",
+                "operationId": "receptionLogin",
                 "consumes": [
                     "application/json"
                 ],
@@ -670,7 +669,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/lekarzLogin"
+                                "$ref": "#/definitions/Login"
                             }
                         }
                     }
@@ -686,7 +685,7 @@
     "securityDefinitions": {
         "api_key": {
             "type": "apiKey",
-            "name": "api_key",
+            "name": "apikey",
             "in": "header"
         }
     },
@@ -702,15 +701,7 @@
                 }
             }
         },
-        "pacjent": {
-            "type": "object",
-            "properties": {
-                "login": {
-                    "type": "string"
-                }
-            }
-        },
-        "pacjentSignup": {
+        "patientSignup": {
             "type": "object",
             "properties": {
                 "login": {
@@ -748,7 +739,15 @@
                 }
             }
         },
-        "pacjentLogin": {
+        "loginString": {
+            "type": "object",
+            "properties": {
+                "login": {
+                    "type": "string"
+                }
+            }
+        },
+        "doctorSignup": {
             "type": "object",
             "properties": {
                 "login": {
@@ -759,26 +758,7 @@
                 }
             }
         },
-        "lekarz": {
-            "type": "object",
-            "properties": {
-                "login": {
-                    "type": "string"
-                }
-            }
-        },
-        "lekarzSignup": {
-            "type": "object",
-            "properties": {
-                "login": {
-                    "type": "string"
-                },
-                "haslo": {
-                    "type": "string"
-                }
-            }
-        },
-        "lekarzUzupelnijDane": {
+        "profileData": {
             "type": "object",
             "properties": {
                 "login": {
@@ -816,7 +796,7 @@
                 }
             }
         },
-        "lekarzLogin": {
+        "Login": {
             "type": "object",
             "properties": {
                 "login": {
