@@ -682,13 +682,6 @@
             }
         }
     },
-    "securityDefinitions": {
-        "api_key": {
-            "type": "apiKey",
-            "name": "apikey",
-            "in": "header"
-        }
-    },
     "definitions": {
         "user": {
             "type": "object",
