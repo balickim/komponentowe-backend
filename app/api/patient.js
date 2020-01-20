@@ -92,4 +92,16 @@ router.post('/login', (req, res, next) => {
         .catch(error => next(error));
 });
 
+router.delete('/:login', (req, res, next) => {
+    const { apikey } = req.headers;
+    const { login } = req.params;
+
+    correctApiKey(apikey)
+        .then(() => {
+            return PatientTable.deletePatientByLogin({ login })
+        })
+        .then(() => res.json({ message: 'usunięto' }))
+        .catch(error => next(error));
+});
+
 module.exports = router;

@@ -193,6 +193,39 @@
                         "description": "successful operation"
                     }
                 }
+            },
+            "delete": {
+                "tags": [
+                    "patient"
+                ],
+                "summary": "patient deleted by login",
+                "description": "Requires apikey",
+                "operationId": "patientDelete",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created user object",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/loginString"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
             }
         },
         "/patient/:pesel": {

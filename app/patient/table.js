@@ -45,6 +45,21 @@ class PatientTable {
             )
         });
     }
+
+    static deletePatientByLogin({ login }) {
+        return new Promise((resolve, reject) => {
+            pool.query(
+                `DELETE FROM danepacjenta 
+                WHERE login = $1`,
+                [login],
+                (error, response) => {
+                    if (error) return reject(error);
+
+                    resolve({ patient: response.rows[0] });
+                }
+            )
+        });
+    }
 }
 
 module.exports = PatientTable;
