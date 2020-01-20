@@ -160,7 +160,7 @@
                 }
             }
         },
-        "/patient/{login}": {
+        "/patient/:login": {
             "get": {
                 "tags": [
                     "patient"
@@ -298,7 +298,7 @@
                 }
             }
         },
-        "/doctor/{login}": {
+        "/doctor/:login": {
             "get": {
                 "tags": [
                     "doctor"
@@ -506,7 +506,7 @@
                 }
             }
         },
-        "/reception/{login}": {
+        "/reception/:login": {
             "get": {
                 "tags": [
                     "reception"

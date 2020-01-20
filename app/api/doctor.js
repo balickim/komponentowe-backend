@@ -4,9 +4,9 @@ const { correctApiKey } = require('./helper')
 
 const router = new Router();
 
-router.get('/', (req, res, next) => {
+router.get('/:login', (req, res, next) => {
     const { apikey } = req.headers;
-    const { login } = req.body;
+    const { login } = req.params;
 
     correctApiKey(apikey)
         .then(() => {
