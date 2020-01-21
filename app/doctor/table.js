@@ -51,7 +51,7 @@ class DoctorTable {
     static getDoctor({ login }) {
         return new Promise((resolve, reject) => {
             pool.query(
-                `SELECT idlekarza, login, haslo FROM lekarz 
+                `SELECT idlekarza, idpracownika, login, haslo FROM lekarz 
                 WHERE login = $1`,
                 [login],
                 (error, response) => {

@@ -103,8 +103,9 @@ router.post('/login', (req, res, next) => {
             DoctorTable.getDoctor({ login })
                 .then(({ doctor }) => {
                     if (doctor && doctor.haslo === haslo) {
-                        let id = doctor.idlekarza;
-                        res.json({ idlekarza: id })
+                        let idlekarza = doctor.idlekarza;
+                        let idpracownika = doctor.idpracownika;
+                        res.json({ idlekarza: idlekarza, idpracownika: idpracownika })
 
                     } else {
                         const error = new Error('Incorrect username or password');
