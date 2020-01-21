@@ -94,7 +94,39 @@ class DoctorTable {
             )
         });
     }
+
+    static deleteDoctorByLogin({ id }) {
+        return new Promise((resolve, reject) => {
+            pool.query(
+                `DELETE FROM lekarz 
+                WHERE idpracownika = $1`,
+                [id],
+                (error, response) => {
+                    if (error) return reject(error);
+
+                    resolve({ patient: response.rows[0] });
+                }
+            )
+        });
+    }
+
+    static deleteProfileDoctorById({ id }) {
+        return new Promise((resolve, reject) => {
+            pool.query(
+                `DELETE
+                FROM danepracownika 
+                WHERE idpracownika = $1`,
+                [id],
+                (error, response) => {
+                    if (error) return reject(error);
+
+                    resolve(response.rows[0]);
+                }
+            )
+        });
+    }
 }
+
 // DoctorTable.getSpecialization({ idlekarza: 5 })
 //     .then((doctor) => { console.log(doctor) })
 //     .catch(error => console.error('error', error));

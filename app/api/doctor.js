@@ -133,4 +133,17 @@ router.get('/specialization/:id', (req, res, next) => {
         .catch(error => next(error));
 });
 
+router.delete('/:id', (req, res, next) => {
+    const { apikey } = req.headers;
+    const { id } = req.params;
+
+    correctApiKey(apikey)
+        .then(() => {
+            return DoctorTable.deleteDoctorByLogin({ id })
+                && DoctorTable.deleteProfileDoctorById({ id })
+        })
+        .then(() => res.json({ message: 'usunięto' }))
+        .catch(error => next(error));
+});
+
 module.exports = router;

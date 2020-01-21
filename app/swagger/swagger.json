@@ -539,6 +539,41 @@
                 }
             }
         },
+        "/doctor/:id": {
+            "delete": {
+                "tags": [
+                    "doctor"
+                ],
+                "summary": "Delete doctor by worker's id",
+                "description": "Requires apikey",
+                "operationId": "doctorDelete",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created user object",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Login"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
         "/reception/:login": {
             "get": {
                 "tags": [
