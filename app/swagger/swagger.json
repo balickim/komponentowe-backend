@@ -469,7 +469,7 @@
                 }
             }
         },
-        "/doctor/data": {
+        "/doctor/data/:id": {
             "get": {
                 "tags": [
                     "doctor"
@@ -679,7 +679,7 @@
                 }
             }
         },
-        "/reception/data": {
+        "/reception/data/:id": {
             "get": {
                 "tags": [
                     "reception"

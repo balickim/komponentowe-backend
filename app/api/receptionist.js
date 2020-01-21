@@ -82,9 +82,9 @@ router.put('/datafillup', (req, res, next) => {
         .catch(error => next(error));
 });
 
-router.get('/data', (req, res, next) => {
+router.get('/data/:id', (req, res, next) => {
     const { apikey } = req.headers;
-    const { id } = req.body;
+    const { id } = req.params;
 
     correctApiKey(apikey)
         .then(() => {
