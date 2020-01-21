@@ -75,7 +75,7 @@ router.post('/login', (req, res, next) => {
                     if (patient && patient.haslo === haslo) {
 
                         let id = patient.idpacjenta;
-                        res.json({ message: 'zalogowano', idpacjenta: id })
+                        res.json({ idpacjenta: id })
 
                     } else {
                         const error = new Error('Incorrect username or password');

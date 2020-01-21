@@ -105,7 +105,7 @@ router.post('/login', (req, res, next) => {
                     if (receptionist && receptionist.haslo === haslo) {
 
                         let id = receptionist.idrecepcjonistki;
-                        res.json({ message: 'zalogowano', idrecepcjonistki: id })
+                        res.json({ idrecepcjonistki: id })
 
                     } else {
                         const error = new Error('Incorrect username or password');
