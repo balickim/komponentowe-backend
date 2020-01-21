@@ -2,7 +2,7 @@
     "swagger": "2.0",
     "info": {
         "description": "IT system to operate a clinic network",
-        "version": "0.5.7",
+        "version": "0.6.2",
         "title": "Clinic network system",
         "termsOfService": "http://swagger.io/terms/",
         "contact": {

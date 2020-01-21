@@ -51,7 +51,7 @@ class ReceptionistTable {
     static getReceptionist({ login }) {
         return new Promise((resolve, reject) => {
             pool.query(
-                `SELECT idrecepcjonistki, login, haslo FROM recepcja 
+                `SELECT idrecepcjonistki, idpracownika, login, haslo FROM recepcja 
                 WHERE login = $1`,
                 [login],
                 (error, response) => {
