@@ -78,6 +78,37 @@ class ReceptionistTable {
             )
         });
     }
+
+    static deleteReceptionistByLogin({ id }) {
+        return new Promise((resolve, reject) => {
+            pool.query(
+                `DELETE FROM recepcja 
+                WHERE idpracownika = $1`,
+                [id],
+                (error, response) => {
+                    if (error) return reject(error);
+
+                    resolve({ patient: response.rows[0] });
+                }
+            )
+        });
+    }
+
+    static deleteProfileReceptionistById({ id }) {
+        return new Promise((resolve, reject) => {
+            pool.query(
+                `DELETE
+                FROM danepracownika 
+                WHERE idpracownika = $1`,
+                [id],
+                (error, response) => {
+                    if (error) return reject(error);
+
+                    resolve(response.rows[0]);
+                }
+            )
+        });
+    }
 }
 
 module.exports = ReceptionistTable;

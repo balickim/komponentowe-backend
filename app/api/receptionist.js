@@ -122,4 +122,17 @@ router.post('/login', (req, res, next) => {
         .catch(error => next(error));
 });
 
+router.delete('/:id', (req, res, next) => {
+    const { apikey } = req.headers;
+    const { id } = req.params;
+
+    correctApiKey(apikey)
+        .then(() => {
+            return ReceptionistTable.deleteReceptionistByLogin({ id })
+                && ReceptionistTable.deleteProfileReceptionistById({ id })
+        })
+        .then(() => res.json({ message: 'usunięto' }))
+        .catch(error => next(error));
+});
+
 module.exports = router;
