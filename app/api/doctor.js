@@ -31,7 +31,7 @@ router.post('/signup', (req, res, next) => {
                         return DoctorTable.storeDoctor({ login, haslo })
 
                     } else {
-                        const error = new Error('Ten login jest już zajęty!');
+                        const error = new Error('Login is taken');
 
                         error.statusCode = 409;
 
@@ -40,7 +40,7 @@ router.post('/signup', (req, res, next) => {
                 })
                 .catch(error => next(error));
         })
-        .then(() => res.json({ message: 'dodano' }))
+        .then(() => res.json({ message: 'added' }))
         .catch(error => next(error));
 });
 
@@ -69,7 +69,7 @@ router.put('/datafillup', (req, res, next) => {
                             && DoctorTable.fillIdOfDataOfDoctor({ login, haslo, imie, nazwisko, email })
 
                     } else {
-                        const error = new Error('Nie ma takiego lekarza');
+                        const error = new Error('Doctor doesnt exist');
 
                         error.statusCode = 409;
 
@@ -78,7 +78,7 @@ router.put('/datafillup', (req, res, next) => {
                 })
                 .catch(error => next(error));
         })
-        .then(() => res.json({ message: 'dodano' }))
+        .then(() => res.json({ message: 'added' }))
         .catch(error => next(error));
 });
 
@@ -103,9 +103,9 @@ router.post('/login', (req, res, next) => {
             DoctorTable.getDoctor({ login })
                 .then(({ doctor }) => {
                     if (doctor && doctor.haslo === haslo) {
-                        let idlekarza = doctor.idlekarza;
-                        let idpracownika = doctor.idpracownika;
-                        res.json({ idlekarza: idlekarza, idpracownika: idpracownika })
+                        let doctorid = doctor.idlekarza;
+                        let workerid = doctor.idpracownika;
+                        res.json({ doctorid: doctorid, workerid: workerid })
 
                     } else {
                         const error = new Error('Incorrect username or password');
@@ -143,7 +143,7 @@ router.delete('/:id', (req, res, next) => {
             return DoctorTable.deleteDoctorByLogin({ id })
                 && DoctorTable.deleteProfileDoctorById({ id })
         })
-        .then(() => res.json({ message: 'usunięto' }))
+        .then(() => res.json({ message: 'deleted' }))
         .catch(error => next(error));
 });
 

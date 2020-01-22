@@ -31,7 +31,7 @@ router.post('/signup', (req, res, next) => {
                         return ReceptionistTable.storeReceptionist({ login, haslo })
 
                     } else {
-                        const error = new Error('Ten login jest już zajęty!');
+                        const error = new Error('Login is taken');
 
                         error.statusCode = 409;
 
@@ -40,7 +40,7 @@ router.post('/signup', (req, res, next) => {
                 })
                 .catch(error => next(error));
         })
-        .then(() => res.json({ message: 'dodano' }))
+        .then(() => res.json({ message: 'added' }))
         .catch(error => next(error));
 });
 
@@ -69,7 +69,7 @@ router.put('/datafillup', (req, res, next) => {
                             && ReceptionistTable.fillIdOfDataOfReceptionist({ login, haslo, imie, nazwisko, email })
 
                     } else {
-                        const error = new Error('Nie ma takiego lekarza');
+                        const error = new Error('Doctor doesnt exist');
 
                         error.statusCode = 409;
 
@@ -78,7 +78,7 @@ router.put('/datafillup', (req, res, next) => {
                 })
                 .catch(error => next(error));
         })
-        .then(() => res.json({ message: 'dodano' }))
+        .then(() => res.json({ message: 'added' }))
         .catch(error => next(error));
 });
 
@@ -104,10 +104,10 @@ router.post('/login', (req, res, next) => {
                 .then(({ receptionist }) => {
                     if (receptionist && receptionist.haslo === haslo) {
 
-                        let idrecepcjonistki = receptionist.idrecepcjonistki;
-                        let idpracownika = receptionist.idpracownika;
+                        let receptionistid = receptionist.idrecepcjonistki;
+                        let workerid = receptionist.idpracownika;
 
-                        res.json({ idrecepcjonistki: idrecepcjonistki, idpracownika: idpracownika })
+                        res.json({ receptionistid: receptionistid, workerid: workerid })
 
                     } else {
                         const error = new Error('Incorrect username or password');
@@ -133,7 +133,7 @@ router.delete('/:id', (req, res, next) => {
             return ReceptionistTable.deleteReceptionistByLogin({ id })
                 && ReceptionistTable.deleteProfileReceptionistById({ id })
         })
-        .then(() => res.json({ message: 'usunięto' }))
+        .then(() => res.json({ message: 'deleted' }))
         .catch(error => next(error));
 });
 

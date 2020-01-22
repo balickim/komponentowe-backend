@@ -52,7 +52,7 @@ router.post('/signup', (req, res, next) => {
                         return PatientTable.storePatient({ login, haslo, imie, nazwisko, idplci, ulica, numerlokalu, miejscowosc, kodpocztowy, numertelefonu, email })
 
                     } else {
-                        const error = new Error('Ten login jest już zajęty!');
+                        const error = new Error('This login is taken');
 
                         error.statusCode = 409;
 
@@ -74,8 +74,8 @@ router.post('/login', (req, res, next) => {
                 .then(({ patient }) => {
                     if (patient && patient.haslo === haslo) {
 
-                        let id = patient.idpacjenta;
-                        res.json({ idpacjenta: id })
+                        let patientid = patient.idpacjenta;
+                        res.json({ patientid: patientid })
 
                     } else {
                         const error = new Error('Incorrect username or password');
@@ -100,7 +100,7 @@ router.delete('/:login', (req, res, next) => {
         .then(() => {
             return PatientTable.deletePatientByLogin({ login })
         })
-        .then(() => res.json({ message: 'usunięto' }))
+        .then(() => res.json({ message: 'deleted' }))
         .catch(error => next(error));
 });
 
