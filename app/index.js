@@ -29,6 +29,10 @@ app.get('/', (req, res, next) => {
     res.redirect('./swagger/api-docs/');
 });
 
+app.get('/stonoga', (req, res, next) => {
+    setTimeout(function () { res.redirect('https://i.ytimg.com/vi/-rf7Jd1oFbc/maxresdefault.jpg'); }, 3000);
+});
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => console.log(`Serwer działa na porcie ${PORT}`));
