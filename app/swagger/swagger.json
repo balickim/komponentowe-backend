@@ -584,6 +584,84 @@
                 }
             }
         },
+        "/doctor/fullschedule/:id": {
+            "get": {
+                "tags": [
+                    "doctor"
+                ],
+                "summary": "Doctor's full schedule",
+                "description": "Requires apikey",
+                "operationId": "doctorFullSchedule",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created user object",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/scheduleResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/doctor/schedule/:id/:day": {
+            "get": {
+                "tags": [
+                    "doctor"
+                ],
+                "summary": "Doctor's schedule by day",
+                "description": "Requires apikey",
+                "operationId": "doctorDailySchedule",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created user object",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/scheduleResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "content": {}
+                    }
+                }
+            }
+        },
         "/reception/:login": {
             "get": {
                 "tags": [
@@ -942,6 +1020,35 @@
                 },
                 "workerid": {
                     "type": "integer"
+                }
+            }
+        },
+        "scheduleResponse": {
+            "type": "object",
+            "properties": {
+                "imie": {
+                    "type": "string"
+                },
+                "nazwisko": {
+                    "type": "string"
+                },
+                "rodzajspecjalizacji": {
+                    "type": "string"
+                },
+                "nazwaprzychodni": {
+                    "type": "string"
+                },
+                "nazwamiasta": {
+                    "type": "string"
+                },
+                "nazwadniatygodnia": {
+                    "type": "string"
+                },
+                "startczas": {
+                    "type": "time"
+                },
+                "stopczas": {
+                    "type": "time"
                 }
             }
         }

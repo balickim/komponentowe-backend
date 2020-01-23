@@ -147,4 +147,28 @@ router.delete('/:id', (req, res, next) => {
         .catch(error => next(error));
 });
 
+router.get('/fullschedule/:id', (req, res, next) => {
+    const { apikey } = req.headers;
+    const { id } = req.params;
+
+    correctApiKey(apikey)
+        .then(() => {
+            return DoctorTable.getSchedule({ idlekarza: id })
+        })
+        .then((doctor) => { res.json(doctor) })
+        .catch(error => next(error));
+});
+
+router.get('/schedule/:id/:day', (req, res, next) => {
+    const { apikey } = req.headers;
+    const { id, day } = req.params;
+
+    correctApiKey(apikey)
+        .then(() => {
+            return DoctorTable.getScheduleByDay({ idlekarza: id, day: day })
+        })
+        .then((doctor) => { res.json(doctor) })
+        .catch(error => next(error));
+});
+
 module.exports = router;

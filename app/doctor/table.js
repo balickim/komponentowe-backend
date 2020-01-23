@@ -125,6 +125,38 @@ class DoctorTable {
             )
         });
     }
+
+    static getSchedule({ idlekarza }) {
+        return new Promise((resolve, reject) => {
+            pool.query(
+                `SELECT imie, nazwisko,rodzajspecjalizacji,nazwaprzychodni,nazwamiasta,nazwadniatygodnia, startczas,stopczas 
+                FROM vgrafiklekarza
+                WHERE idlekarza = $1`,
+                [idlekarza],
+                (error, response) => {
+                    if (error) return reject(error);
+
+                    resolve(response.rows);
+                }
+            )
+        });
+    }
+    static getScheduleByDay({ idlekarza, day }) {
+        return new Promise((resolve, reject) => {
+            pool.query(
+                `SELECT imie, nazwisko,rodzajspecjalizacji,nazwaprzychodni,nazwamiasta,nazwadniatygodnia, startczas,stopczas 
+                FROM vgrafiklekarza
+                WHERE idlekarza = $1 
+                AND nazwadniatygodnia = $2`,
+                [idlekarza, day],
+                (error, response) => {
+                    if (error) return reject(error);
+
+                    resolve(response.rows);
+                }
+            )
+        });
+    }
 }
 
 // DoctorTable.getSpecialization({ idlekarza: 5 })
