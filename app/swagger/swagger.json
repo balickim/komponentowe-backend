@@ -2,8 +2,8 @@
     "swagger": "2.0",
     "info": {
         "description": "IT system to operate a clinic network",
-        "version": "0.6.2",
-        "title": "Clinic network system",
+        "version": "0.7.5",
+        "title": "Sommed - Clinic network system - a.k.a. SUPER PRZYCHODNIE",
         "termsOfService": "http://swagger.io/terms/",
         "contact": {
             "email": "michal.balicki@onet.pl"
