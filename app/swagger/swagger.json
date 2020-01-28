@@ -2,7 +2,7 @@
     "swagger": "2.0",
     "info": {
         "description": "IT system to operate a clinic network",
-        "version": "0.7.5",
+        "version": "0.8.0",
         "title": "Sommed - Clinic network system - a.k.a. SUPER PRZYCHODNIE",
         "termsOfService": "http://swagger.io/terms/",
         "contact": {
@@ -26,6 +26,10 @@
         {
             "name": "reception",
             "description": "Operations on or by reception workers"
+        },
+        {
+            "name": "clinic",
+            "description": "Operations on clinics"
         }
     ],
     "schemes": [
@@ -881,6 +885,198 @@
                     }
                 }
             }
+        },
+        "/clinic/:id": {
+            "get": {
+                "tags": [
+                    "clinic"
+                ],
+                "summary": "Get specific clinic from system",
+                "description": "Requires apikey",
+                "operationId": "clinicGet",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created user object",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/clinic"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/clinic": {
+            "post": {
+                "tags": [
+                    "clinic"
+                ],
+                "summary": "Add clinic to system",
+                "description": "Requires apikey",
+                "operationId": "clinicAdd",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created user object",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/clinicAdd"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "message": "added"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "content": {}
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "clinic"
+                ],
+                "summary": "Get all clinics from system",
+                "description": "Requires apikey",
+                "operationId": "clinicGetAll",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created user object",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/clinic"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "content": {}
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "clinic"
+                ],
+                "summary": "Update clinic in system",
+                "description": "Requires apikey",
+                "operationId": "clinicPut",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created user object",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/clinicAdd"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "message": "updated"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "content": {}
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "clinic"
+                ],
+                "summary": "Delete clinic from system",
+                "description": "Requires apikey",
+                "operationId": "clinicDelete",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created user object",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "message": "deleted"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "content": {}
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -1048,6 +1244,55 @@
                     "type": "time"
                 },
                 "stopczas": {
+                    "type": "time"
+                }
+            }
+        },
+        "clinic": {
+            "type": "object",
+            "properties": {
+                "idprzychodni": {
+                    "type": "integer"
+                },
+                "idmiasta": {
+                    "type": "integer"
+                },
+                "nazwaprzychodni": {
+                    "type": "string"
+                },
+                "ulica": {
+                    "type": "string"
+                },
+                "kodpocztowy": {
+                    "type": "string"
+                },
+                "numertelefonu": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "time"
+                }
+            }
+        },
+        "clinicAdd": {
+            "type": "object",
+            "properties": {
+                "idmiasta": {
+                    "type": "integer"
+                },
+                "nazwaprzychodni": {
+                    "type": "string"
+                },
+                "ulica": {
+                    "type": "string"
+                },
+                "kodpocztowy": {
+                    "type": "string"
+                },
+                "numertelefonu": {
+                    "type": "string"
+                },
+                "email": {
                     "type": "time"
                 }
             }
