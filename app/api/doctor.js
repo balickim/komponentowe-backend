@@ -159,6 +159,18 @@ router.get('/fullschedule/:id', (req, res, next) => {
         .catch(error => next(error));
 });
 
+router.post('/searchschedule', (req, res, next) => {
+    const { apikey } = req.headers;
+    const { specializationname, surname, name } = req.body;
+
+    correctApiKey(apikey)
+        .then(() => {
+            return DoctorTable.getScheduleByStrings({ rodzajspecjalizacji: specializationname, nazwisko: surname, imie: name })
+        })
+        .then((doctor) => { res.json(doctor) })
+        .catch(error => next(error));
+});
+
 router.get('/schedule/:id/:day', (req, res, next) => {
     const { apikey } = req.headers;
     const { id, day } = req.params;
@@ -166,6 +178,17 @@ router.get('/schedule/:id/:day', (req, res, next) => {
     correctApiKey(apikey)
         .then(() => {
             return DoctorTable.getScheduleByDay({ idlekarza: id, day: day })
+        })
+        .then((doctor) => { res.json(doctor) })
+        .catch(error => next(error));
+});
+
+router.get('/', (req, res, next) => {
+    const { apikey } = req.headers;
+
+    correctApiKey(apikey)
+        .then(() => {
+            return DoctorTable.getDoctorsAndSpecialization()
         })
         .then((doctor) => { res.json(doctor) })
         .catch(error => next(error));

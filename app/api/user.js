@@ -8,7 +8,7 @@ const router = new Router();
 router.get('/', (req, res, next) => {
     const { apikey } = req.headers;
 
-    console.log("req.headers: " + apikey)
+    // console.log("req.headers: " + apikey)
 
     correctApiKey(apikey)
         .then(() => {

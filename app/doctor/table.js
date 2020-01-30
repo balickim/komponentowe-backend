@@ -141,6 +141,24 @@ class DoctorTable {
             )
         });
     }
+
+    static getScheduleByStrings({ rodzajspecjalizacji, nazwisko, imie }) {
+        return new Promise((resolve, reject) => {
+            pool.query(
+                `SELECT nazwaprzychodni,nazwamiasta,nazwadniatygodnia, startczas,stopczas 
+                FROM vgrafiklekarza
+                WHERE rodzajspecjalizacji = $1
+                AND nazwisko = $2
+                AND imie = $3`,
+                [rodzajspecjalizacji, nazwisko, imie],
+                (error, response) => {
+                    if (error) return reject(error);
+
+                    resolve(response.rows);
+                }
+            )
+        });
+    }
     static getScheduleByDay({ idlekarza, day }) {
         return new Promise((resolve, reject) => {
             pool.query(
@@ -157,9 +175,22 @@ class DoctorTable {
             )
         });
     }
+
+    static getDoctorsAndSpecialization() {
+        return new Promise((resolve, reject) => {
+            pool.query(
+                'SELECT DISTINCT imie, nazwisko, rodzajspecjalizacji FROM vgrafiklekarza',
+                (error, response) => {
+                    if (error) return reject(error);
+
+                    resolve(response.rows);
+                }
+            )
+        });
+    }
 }
 
-// DoctorTable.getSpecialization({ idlekarza: 5 })
+// DoctorTable.getDoctorsAndSpecialization()
 //     .then((doctor) => { console.log(doctor) })
 //     .catch(error => console.error('error', error));
 

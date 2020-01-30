@@ -2,7 +2,7 @@
     "swagger": "2.0",
     "info": {
         "description": "IT system to operate a clinic network",
-        "version": "0.8.0",
+        "version": "0.8.8",
         "title": "Sommed - Clinic network system - a.k.a. SUPER PRZYCHODNIE",
         "termsOfService": "http://swagger.io/terms/",
         "contact": {
@@ -335,6 +335,45 @@
                 }
             }
         },
+        "/doctor": {
+            "get": {
+                "tags": [
+                    "doctor"
+                ],
+                "summary": "All doctors and theirs specializations",
+                "description": "Requires apikey",
+                "operationId": "doctorSpecialization",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created user object",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/scheduleResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "content": {}
+                    }
+                }
+            }
+        },
         "/doctor/:login": {
             "get": {
                 "tags": [
@@ -584,6 +623,45 @@
                 "responses": {
                     "default": {
                         "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/doctor/searchschedule": {
+            "post": {
+                "tags": [
+                    "doctor"
+                ],
+                "summary": "Doctor's full schedule by strings ",
+                "description": "Requires apikey",
+                "operationId": "doctorFullScheduleBySpecialization",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created user object",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/scheduleResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "content": {}
                     }
                 }
             }
