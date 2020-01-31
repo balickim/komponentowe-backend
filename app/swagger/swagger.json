@@ -1008,7 +1008,7 @@
                 ],
                 "summary": "Get specific visit from system",
                 "description": "Requires apikey",
-                "operationId": "receptionGet",
+                "operationId": "visitGet",
                 "consumes": [
                     "application/json"
                 ],
@@ -1082,7 +1082,7 @@
                 ],
                 "summary": "Remove specific visit from system",
                 "description": "Requires apikey",
-                "operationId": "receptionDelete",
+                "operationId": "visitDelete",
                 "consumes": [
                     "application/json"
                 ],
