@@ -109,6 +109,73 @@ class ReceptionistTable {
             )
         });
     }
+
+    static addVisit({ idgrafiku, idcennika, idpacjenta, idrecepcjonistki, dataczasstart, dataczasstop }) {
+        return new Promise((resolve, reject) => {
+            pool.query(
+                `INSERT INTO wizyta (idgrafiku, idcennika, idpacjenta, idrecepcjonistki, dataczasstart, dataczasstop)
+                VALUES ($1,$2,$3,$4,$5,$6);`,
+                [idgrafiku, idcennika, idpacjenta, idrecepcjonistki, dataczasstart, dataczasstop],
+                (error, response) => {
+                    if (error) return reject(error);
+
+                    resolve();
+                }
+            )
+        });
+    }
+
+    static getVisit({ idwizyty }) {
+        return new Promise((resolve, reject) => {
+            pool.query(
+                `SELECT idgrafiku, idcennika, idpacjenta, idrecepcjonistki, dataczasstart, dataczasstop FROM wizyta 
+                WHERE idwizyty = $1`,
+                [idwizyty],
+                (error, response) => {
+                    if (error) return reject(error);
+
+                    resolve(response.rows[0]);
+                }
+            )
+        });
+    }
+
+    static updateVisit({ idwizyty, idgrafiku, idcennika, idpacjenta, idrecepcjonistki, dataczasstart, dataczasstop }) {
+        return new Promise((resolve, reject) => {
+            pool.query(
+                `UPDATE wizyta
+                SET idgrafiku = $1,
+                    idcennika = $2,
+                    idpacjenta = $3,
+                    idrecepcjonistki = $4,
+                    dataczasstart = $5,
+                    dataczasstop = $6
+                WHERE
+                idwizyty = $7;`,
+                [idgrafiku, idcennika, idpacjenta, idrecepcjonistki, dataczasstart, dataczasstop, idwizyty],
+                (error, response) => {
+                    if (error) return reject(error);
+
+                    resolve();
+                }
+            )
+        });
+    }
+
+    static deleteVisit({ idwizyty }) {
+        return new Promise((resolve, reject) => {
+            pool.query(
+                `DELETE FROM wizyta
+                WHERE idwizyty = $1;`,
+                [idwizyty],
+                (error, response) => {
+                    if (error) return reject(error);
+
+                    resolve();
+                }
+            )
+        });
+    }
 }
 
 module.exports = ReceptionistTable;
