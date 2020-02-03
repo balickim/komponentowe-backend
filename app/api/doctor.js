@@ -194,4 +194,15 @@ router.get('/', (req, res, next) => {
         .catch(error => next(error));
 });
 
+router.get('/tempdoctorlist', (req, res, next) => {
+    const { apikey } = req.headers;
+
+    correctApiKey(apikey)
+        .then(() => {
+            return DoctorTable.getDoctorsTemporary()
+        })
+        .then((doctor) => { res.json(doctor) })
+        .catch(error => next(error));
+});
+
 module.exports = router;

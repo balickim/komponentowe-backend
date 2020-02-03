@@ -188,6 +188,20 @@ class DoctorTable {
             )
         });
     }
+
+    static getDoctorsTemporary() {
+        return new Promise((resolve, reject) => {
+            pool.query(
+                `SELECT idlekarza, idpracownika, login, haslo FROM lekarz`,
+                [login],
+                (error, response) => {
+                    if (error) return reject(error);
+
+                    resolve({ doctor: response.rows });
+                }
+            )
+        });
+    }
 }
 
 // DoctorTable.getDoctorsAndSpecialization()
