@@ -2,7 +2,7 @@
     "swagger": "2.0",
     "info": {
         "description": "IT system to operate a clinic network",
-        "version": "0.9.1",
+        "version": "0.9.9",
         "title": "Clinic Sommed Super System",
         "termsOfService": "http://swagger.io/terms/",
         "contact": {
@@ -180,21 +180,25 @@
                 ],
                 "parameters": [
                     {
-                        "in": "body",
-                        "name": "body",
+                        "in": "path",
+                        "name": "login",
                         "description": "Created user object",
-                        "required": true,
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/loginString"
-                            }
-                        }
+                        "required": true
                     }
                 ],
                 "responses": {
-                    "default": {
-                        "description": "successful operation"
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/scheduleResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid value",
+                        "content": {}
                     }
                 }
             },
@@ -213,21 +217,19 @@
                 ],
                 "parameters": [
                     {
-                        "in": "body",
-                        "name": "body",
+                        "in": "path",
+                        "name": "login",
                         "description": "Created user object",
-                        "required": true,
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/loginString"
-                            }
-                        }
+                        "required": true
                     }
                 ],
                 "responses": {
-                    "default": {
+                    "200": {
                         "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid value",
+                        "content": {}
                     }
                 }
             }
@@ -259,8 +261,12 @@
                     }
                 ],
                 "responses": {
-                    "default": {
+                    "200": {
                         "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid value",
+                        "content": {}
                     }
                 }
             }
@@ -294,8 +300,12 @@
                     }
                 ],
                 "responses": {
-                    "default": {
+                    "200": {
                         "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid value",
+                        "content": {}
                     }
                 }
             }
@@ -329,8 +339,12 @@
                     }
                 ],
                 "responses": {
-                    "default": {
+                    "200": {
                         "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid value",
+                        "content": {}
                     }
                 }
             }
@@ -349,21 +363,13 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "Created user object",
-                        "required": true
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "successful operation",
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/scheduleResponse"
+                                "$ref": "#/definitions/doctorAndSpecialization"
                             }
                         }
                     },
@@ -390,21 +396,19 @@
                 ],
                 "parameters": [
                     {
-                        "in": "body",
-                        "name": "body",
+                        "in": "path",
+                        "name": "login",
                         "description": "Created user object",
-                        "required": true,
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/loginString"
-                            }
-                        }
+                        "required": true
                     }
                 ],
                 "responses": {
-                    "default": {
+                    "200": {
                         "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "content": {}
                     }
                 }
             }
@@ -436,8 +440,12 @@
                     }
                 ],
                 "responses": {
-                    "default": {
+                    "200": {
                         "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "content": {}
                     }
                 }
             }
@@ -471,8 +479,12 @@
                     }
                 ],
                 "responses": {
-                    "default": {
+                    "200": {
                         "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "content": {}
                     }
                 }
             }
@@ -506,8 +518,12 @@
                     }
                 ],
                 "responses": {
-                    "default": {
+                    "200": {
                         "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "content": {}
                     }
                 }
             }
@@ -528,21 +544,19 @@
                 ],
                 "parameters": [
                     {
-                        "in": "body",
-                        "name": "body",
-                        "description": "Created user object",
-                        "required": true,
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/profileData"
-                            }
-                        }
+                        "in": "path",
+                        "name": "id",
+                        "description": "workers ID",
+                        "required": true
                     }
                 ],
                 "responses": {
-                    "default": {
+                    "200": {
                         "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "content": {}
                     }
                 }
             }
@@ -608,21 +622,19 @@
                 ],
                 "parameters": [
                     {
-                        "in": "body",
-                        "name": "body",
+                        "in": "path",
+                        "name": "worders ID",
                         "description": "Created user object",
-                        "required": true,
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/login"
-                            }
-                        }
+                        "required": true
                     }
                 ],
                 "responses": {
-                    "default": {
+                    "200": {
                         "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "content": {}
                     }
                 }
             }
@@ -646,7 +658,13 @@
                         "in": "body",
                         "name": "body",
                         "description": "Created user object",
-                        "required": true
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/searchScheduleStrings"
+                            }
+                        }
                     }
                 ],
                 "responses": {
@@ -655,7 +673,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/scheduleResponse"
+                                "$ref": "#/definitions/searchScheduleStringsResponse"
                             }
                         }
                     },
@@ -682,8 +700,8 @@
                 ],
                 "parameters": [
                     {
-                        "in": "body",
-                        "name": "body",
+                        "in": "path",
+                        "name": "doctors ID",
                         "description": "Created user object",
                         "required": true
                     }
@@ -721,8 +739,14 @@
                 ],
                 "parameters": [
                     {
-                        "in": "body",
-                        "name": "body",
+                        "in": "path",
+                        "name": "workers ID",
+                        "description": "Created user object",
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "day",
                         "description": "Created user object",
                         "required": true
                     }
@@ -751,7 +775,7 @@
                 ],
                 "summary": "Reception worker found by login",
                 "description": "Requires apikey",
-                "operationId": "reception",
+                "operationId": "receptionByLogin",
                 "consumes": [
                     "application/json"
                 ],
@@ -760,21 +784,19 @@
                 ],
                 "parameters": [
                     {
-                        "in": "body",
-                        "name": "body",
-                        "description": "Created user object",
-                        "required": true,
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/loginString"
-                            }
-                        }
+                        "in": "path",
+                        "name": "login",
+                        "description": "workers login",
+                        "required": true
                     }
                 ],
                 "responses": {
-                    "default": {
+                    "200": {
                         "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "content": {}
                     }
                 }
             }
@@ -808,8 +830,12 @@
                     }
                 ],
                 "responses": {
-                    "default": {
+                    "200": {
                         "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "content": {}
                     }
                 }
             }
@@ -837,14 +863,24 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/doctorDataFillUp"
+                                "$ref": "#/definitions/profileData"
                             }
                         }
                     }
                 ],
                 "responses": {
-                    "default": {
-                        "description": "successful operation"
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/receptionWorker"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "content": {}
                     }
                 }
             }
@@ -865,9 +901,9 @@
                 ],
                 "parameters": [
                     {
-                        "in": "body",
-                        "name": "body",
-                        "description": "Created user object",
+                        "in": "path",
+                        "name": "id",
+                        "description": "workers ID",
                         "required": true,
                         "schema": {
                             "type": "array",
@@ -878,8 +914,12 @@
                     }
                 ],
                 "responses": {
-                    "default": {
+                    "200": {
                         "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "content": {}
                     }
                 }
             }
@@ -945,9 +985,9 @@
                 ],
                 "parameters": [
                     {
-                        "in": "body",
-                        "name": "body",
-                        "description": "Created user object",
+                        "in": "path",
+                        "name": "id",
+                        "description": "workers ID",
                         "required": true,
                         "schema": {
                             "type": "array",
@@ -958,8 +998,12 @@
                     }
                 ],
                 "responses": {
-                    "default": {
+                    "200": {
                         "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "content": {}
                     }
                 }
             }
@@ -982,19 +1026,17 @@
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "Created user object",
-                        "required": true
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/visitSchema"
+                            }
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/clinic"
-                            }
-                        }
+                        "description": "successful operation"
                     },
                     "400": {
                         "description": "Invalid status value",
@@ -1017,9 +1059,9 @@
                 ],
                 "parameters": [
                     {
-                        "in": "body",
-                        "name": "body",
-                        "description": "Created user object",
+                        "in": "path",
+                        "name": "id",
+                        "description": "visits ID",
                         "required": true
                     }
                 ],
@@ -1029,7 +1071,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/clinic"
+                                "$ref": "#/definitions/visitSchema"
                             }
                         }
                     },
@@ -1062,13 +1104,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/clinic"
-                            }
-                        }
+                        "description": "successful operation"
                     },
                     "400": {
                         "description": "Invalid status value",
@@ -1091,21 +1127,15 @@
                 ],
                 "parameters": [
                     {
-                        "in": "body",
-                        "name": "body",
-                        "description": "Created user object",
+                        "in": "path",
+                        "name": "id",
+                        "description": "visits ID",
                         "required": true
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/clinic"
-                            }
-                        }
+                        "description": "successful operation"
                     },
                     "400": {
                         "description": "Invalid status value",
@@ -1130,9 +1160,9 @@
                 ],
                 "parameters": [
                     {
-                        "in": "body",
-                        "name": "body",
-                        "description": "Created user object",
+                        "in": "path",
+                        "name": "id",
+                        "description": "clinic ID",
                         "required": true
                     }
                 ],
@@ -1206,14 +1236,6 @@
                 ],
                 "produces": [
                     "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "Created user object",
-                        "required": true
-                    }
                 ],
                 "responses": {
                     "200": {
@@ -1335,7 +1357,7 @@
                     "type": "string"
                 },
                 "idplci": {
-                    "type": "string"
+                    "type": "integer"
                 },
                 "ulica": {
                     "type": "string"
@@ -1353,6 +1375,9 @@
                     "type": "string"
                 },
                 "email": {
+                    "type": "string"
+                },
+                "pesel": {
                     "type": "string"
                 }
             }
@@ -1521,6 +1546,94 @@
                     "type": "string"
                 },
                 "email": {
+                    "type": "time"
+                }
+            }
+        },
+        "doctorAndSpecialization": {
+            "type": "object",
+            "properties": {
+                "imie": {
+                    "type": "string"
+                },
+                "nazwisko": {
+                    "type": "string"
+                },
+                "rodzajspecjaliacji": {
+                    "type": "string"
+                }
+            }
+        },
+        "searchScheduleStrings": {
+            "type": "object",
+            "properties": {
+                "specializationname": {
+                    "type": "string"
+                },
+                "surname": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "searchScheduleStringsResponse": {
+            "type": "object",
+            "properties": {
+                "nazwaprzychodni": {
+                    "type": "string"
+                },
+                "nazwamiasta": {
+                    "type": "string"
+                },
+                "nazwadniatygodnia": {
+                    "type": "string"
+                },
+                "startczas": {
+                    "type": "time"
+                },
+                "stopczas": {
+                    "type": "time"
+                }
+            }
+        },
+        "receptionWorker": {
+            "type": "object",
+            "properties": {
+                "idrecepcjonistki": {
+                    "type": "string"
+                },
+                "idpracownika": {
+                    "type": "string"
+                },
+                "login": {
+                    "type": "string"
+                },
+                "haslo": {
+                    "type": "string"
+                }
+            }
+        },
+        "visitSchema": {
+            "type": "object",
+            "properties": {
+                "idgrafiku": {
+                    "type": "integer"
+                },
+                "idcennika": {
+                    "type": "integer"
+                },
+                "idpacjenta": {
+                    "type": "integer"
+                },
+                "idrecepcjonistki": {
+                    "type": "integer"
+                },
+                "dataczasstart": {
+                    "type": "time"
+                },
+                "dataczasstop": {
                     "type": "time"
                 }
             }
