@@ -179,7 +179,7 @@ class DoctorTable {
     static getDoctorsAndSpecialization() {
         return new Promise((resolve, reject) => {
             pool.query(
-                'SELECT DISTINCT imie, nazwisko, rodzajspecjalizacji FROM vgrafiklekarza',
+                'SELECT DISTINCT imie, nazwisko, rodzajspecjalizacji FROM vspecjalizacjalekarza',
                 (error, response) => {
                     if (error) return reject(error);
 

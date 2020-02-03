@@ -137,4 +137,52 @@ router.delete('/:id', (req, res, next) => {
         .catch(error => next(error));
 });
 
+router.post('/visit', (req, res, next) => {
+    const { apikey } = req.headers;
+    const { idgrafiku, idcennika, idpacjenta, idrecepcjonistki, dataczasstart, dataczasstop } = req.body;
+
+    correctApiKey(apikey)
+        .then(() => {
+            return ReceptionistTable.addVisit({ idgrafiku, idcennika, idpacjenta, idrecepcjonistki, dataczasstart, dataczasstop })
+        })
+        .then(() => res.json({ message: 'added' }))
+        .catch(error => next(error));
+});
+
+router.get('/visit/:id', (req, res, next) => {
+    const { apikey } = req.headers;
+    const { id } = req.params;
+
+    correctApiKey(apikey)
+        .then(() => {
+            return ReceptionistTable.getVisit({ idwizyty: id })
+        })
+        .then((receptionist) => { res.json(receptionist) })
+        .catch(error => next(error));
+});
+
+router.put('/visit', (req, res, next) => {
+    const { apikey } = req.headers;
+    const { idwizyty, idgrafiku, idcennika, idpacjenta, idrecepcjonistki, dataczasstart, dataczasstop } = req.body;
+
+    correctApiKey(apikey)
+        .then(() => {
+            return ReceptionistTable.updateVisit({ idwizyty, idgrafiku, idcennika, idpacjenta, idrecepcjonistki, dataczasstart, dataczasstop })
+        })
+        .then(() => res.json({ message: 'updated' }))
+        .catch(error => next(error));
+});
+
+router.delete('/visit/:id', (req, res, next) => {
+    const { apikey } = req.headers;
+    const { id } = req.params;
+
+    correctApiKey(apikey)
+        .then(() => {
+            return ReceptionistTable.deleteVisit({ idwizyty: id })
+        })
+        .then(() => res.json({ message: 'deleted' }))
+        .catch(error => next(error));
+});
+
 module.exports = router;

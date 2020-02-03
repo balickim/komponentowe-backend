@@ -2,8 +2,8 @@
     "swagger": "2.0",
     "info": {
         "description": "IT system to operate a clinic network",
-        "version": "0.8.8",
-        "title": "Sommed - Clinic network system - a.k.a. SUPER PRZYCHODNIE",
+        "version": "0.9.1",
+        "title": "Clinic Sommed Super System",
         "termsOfService": "http://swagger.io/terms/",
         "contact": {
             "email": "michal.balicki@onet.pl"
@@ -960,6 +960,156 @@
                 "responses": {
                     "default": {
                         "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/reception/visit": {
+            "post": {
+                "tags": [
+                    "reception"
+                ],
+                "summary": "Add visit to system",
+                "description": "Requires apikey",
+                "operationId": "visitAdd",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created user object",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/clinic"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "content": {}
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "reception"
+                ],
+                "summary": "Get specific visit from system",
+                "description": "Requires apikey",
+                "operationId": "visitGet",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created user object",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/clinic"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "content": {}
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "reception"
+                ],
+                "summary": "Add visit to system",
+                "description": "Requires apikey",
+                "operationId": "visitPut",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created user object",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/clinic"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "content": {}
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "reception"
+                ],
+                "summary": "Remove specific visit from system",
+                "description": "Requires apikey",
+                "operationId": "visitDelete",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created user object",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/clinic"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "content": {}
                     }
                 }
             }
