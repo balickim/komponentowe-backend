@@ -1,12 +1,12 @@
 const pool = require('../../databasePool');
 
 class PatientTable {
-    static storePatient({ login, haslo, imie, nazwisko, idplci, ulica, numerlokalu, miejscowosc, kodpocztowy, numertelefonu, email }) {
+    static storePatient({ login, haslo, imie, nazwisko, idplci, ulica, numerlokalu, miejscowosc, kodpocztowy, numertelefonu, email, pesel }) {
         return new Promise((resolve, reject) => {
             pool.query(
-                `INSERT INTO danepacjenta (login, haslo, imie, nazwisko, idplci, ulica, numerlokalu, miejscowosc, kodpocztowy, numertelefonu, email) 
-                VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)`,
-                [login, haslo, imie, nazwisko, idplci, ulica, numerlokalu, miejscowosc, kodpocztowy, numertelefonu, email],
+                `INSERT INTO danepacjenta (login, haslo, imie, nazwisko, idplci, ulica, numerlokalu, miejscowosc, kodpocztowy, numertelefonu, email, pesel) 
+                VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)`,
+                [login, haslo, imie, nazwisko, idplci, ulica, numerlokalu, miejscowosc, kodpocztowy, numertelefonu, email, pesel],
                 (error, response) => {
                     if (error) return reject(error);
 

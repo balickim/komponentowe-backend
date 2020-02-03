@@ -41,7 +41,8 @@ router.post('/signup', (req, res, next) => {
         miejscowosc,
         kodpocztowy,
         numertelefonu,
-        email } = req.body;
+        email,
+        pesel } = req.body;
 
     correctApiKey(apikey)
         .then(() => {
@@ -49,7 +50,7 @@ router.post('/signup', (req, res, next) => {
                 .then(({ account }) => {
                     if (!account) {
 
-                        return PatientTable.storePatient({ login, haslo, imie, nazwisko, idplci, ulica, numerlokalu, miejscowosc, kodpocztowy, numertelefonu, email })
+                        return PatientTable.storePatient({ login, haslo, imie, nazwisko, idplci, ulica, numerlokalu, miejscowosc, kodpocztowy, numertelefonu, email, pesel })
 
                     } else {
                         const error = new Error('This login is taken');
