@@ -192,12 +192,11 @@ class DoctorTable {
     static getDoctorsTemporary() {
         return new Promise((resolve, reject) => {
             pool.query(
-                `SELECT idlekarza, idpracownika, login, haslo FROM lekarz`,
-                [login],
+                'SELECT idlekarza, idpracownika, login, haslo FROM lekarz',
                 (error, response) => {
                     if (error) return reject(error);
 
-                    resolve({ doctor: response.rows });
+                    resolve(response.rows);
                 }
             )
         });

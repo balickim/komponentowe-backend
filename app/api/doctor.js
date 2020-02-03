@@ -194,7 +194,7 @@ router.get('/', (req, res, next) => {
         .catch(error => next(error));
 });
 
-router.get('/tempdoctorlist', (req, res, next) => {
+router.post('/doctorstemporary', (req, res, next) => {
     const { apikey } = req.headers;
 
     correctApiKey(apikey)
