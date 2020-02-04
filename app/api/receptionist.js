@@ -149,6 +149,17 @@ router.post('/visit', (req, res, next) => {
         .catch(error => next(error));
 });
 
+router.get('/all', (req, res, next) => {
+    const { apikey } = req.headers;
+
+    correctApiKey(apikey)
+        .then(() => {
+            return ReceptionistTable.getVisits()
+        })
+        .then((receptionist) => { res.json(receptionist) })
+        .catch(error => next(error));
+});
+
 router.get('/visit/:id', (req, res, next) => {
     const { apikey } = req.headers;
     const { id } = req.params;
