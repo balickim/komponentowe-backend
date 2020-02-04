@@ -140,19 +140,6 @@ class ReceptionistTable {
         });
     }
 
-    static getVisits() {
-        return new Promise((resolve, reject) => {
-            pool.query(
-                `SELECT idwizyty, idgrafiku, idcennika, idpacjenta, idrecepcjonistki, dataczasstart, dataczasstop FROM wizyta`,
-                (error, response) => {
-                    if (error) return reject(error);
-
-                    resolve(response.rows);
-                }
-            )
-        });
-    }
-
     static updateVisit({ idwizyty, idgrafiku, idcennika, idpacjenta, idrecepcjonistki, dataczasstart, dataczasstop }) {
         return new Promise((resolve, reject) => {
             pool.query(
