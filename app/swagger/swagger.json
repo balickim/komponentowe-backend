@@ -12,10 +12,6 @@
     "host": "https://komponentowe-backend.herokuapp.com/",
     "tags": [
         {
-            "name": "user",
-            "description": "Endpoints for testing connection"
-        },
-        {
             "name": "patient",
             "description": "Operations on patients"
         },
@@ -36,134 +32,6 @@
         "http"
     ],
     "paths": {
-        "/user": {
-            "get": {
-                "tags": [
-                    "user"
-                ],
-                "summary": "List of users",
-                "description": "Requires apikey",
-                "operationId": "user",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "Created user object",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "default": {
-                        "description": "successful operation"
-                    }
-                }
-            }
-        },
-        "/user/noapikey": {
-            "get": {
-                "tags": [
-                    "user"
-                ],
-                "summary": "List of users without apikey",
-                "description": "",
-                "operationId": "usernoapikey",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "Created user object",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "default": {
-                        "description": "successful operation"
-                    }
-                }
-            }
-        },
-        "/user/signup": {
-            "post": {
-                "tags": [
-                    "user"
-                ],
-                "summary": "User register",
-                "description": "Requires apikey",
-                "operationId": "createUsersWithArrayInput",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "List of user object",
-                        "required": true,
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/user"
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "default": {
-                        "description": "dodano"
-                    }
-                }
-            }
-        },
-        "/user/login": {
-            "post": {
-                "tags": [
-                    "user"
-                ],
-                "summary": "User login",
-                "description": "Requires apikey",
-                "operationId": "loginUsersWithArrayInput",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "List of user object",
-                        "required": true,
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/user"
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "message": {
-                        "description": "zalogowano"
-                    }
-                }
-            }
-        },
         "/patient/:login": {
             "get": {
                 "tags": [
@@ -182,7 +50,7 @@
                     {
                         "in": "path",
                         "name": "login",
-                        "description": "Created user object",
+                        "description": "users login",
                         "required": true
                     }
                 ],
@@ -219,7 +87,7 @@
                     {
                         "in": "path",
                         "name": "login",
-                        "description": "Created user object",
+                        "description": "patients login",
                         "required": true
                     }
                 ],
@@ -289,7 +157,7 @@
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "Created user object",
+                        "description": "patients body",
                         "required": true,
                         "schema": {
                             "type": "array",
@@ -328,7 +196,7 @@
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "Created user object",
+                        "description": "patient body",
                         "required": true,
                         "schema": {
                             "type": "array",
@@ -398,7 +266,7 @@
                     {
                         "in": "path",
                         "name": "login",
-                        "description": "Created user object",
+                        "description": "patients body",
                         "required": true
                     }
                 ],
@@ -468,7 +336,7 @@
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "Created user object",
+                        "description": "doctor body",
                         "required": true,
                         "schema": {
                             "type": "array",
@@ -507,7 +375,7 @@
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "Created user object",
+                        "description": "doctor profile body",
                         "required": true,
                         "schema": {
                             "type": "array",
@@ -579,7 +447,7 @@
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "Created user object",
+                        "description": "doctor body",
                         "required": true,
                         "schema": {
                             "type": "array",
@@ -624,7 +492,6 @@
                     {
                         "in": "path",
                         "name": "worders ID",
-                        "description": "Created user object",
                         "required": true
                     }
                 ],
@@ -1330,17 +1197,6 @@
         }
     },
     "definitions": {
-        "user": {
-            "type": "object",
-            "properties": {
-                "username": {
-                    "type": "string"
-                },
-                "password": {
-                    "type": "string"
-                }
-            }
-        },
         "patientSignup": {
             "type": "object",
             "properties": {
